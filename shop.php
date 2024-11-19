@@ -128,7 +128,7 @@
 	  </div>  
 	-->
 		  
-     <div class="buyShop">
+     <div class="buyShop" name="buyProduct">
 
            <div class="product-box">
 
@@ -141,7 +141,7 @@
         
         </div>
 
-		<div class="buyShop">
+		<div class="buyShop" name="buyProduct">
 
 			<div class="product-box">
  
@@ -154,7 +154,7 @@
 		 
 		 </div>
 
-		 <div class="buyShop">
+		 <div class="buyShop" name="buyProduct">
 
 			<div class="product-box">
  
@@ -167,7 +167,7 @@
 		 
 		 </div>
 
-		 <div class="buyShop">
+		 <div class="buyShop" name="buyProduct">
 
 			<div class="product-box">
  
@@ -180,7 +180,7 @@
 		 
 		 </div>
 
-		 <div class="buyShop">
+		 <div class="buyShop" name="buyProduct">
 
 			<div class="product-box">
  
@@ -193,7 +193,7 @@
 		 
 		 </div>
 
-		 <div class="buyShop">
+		 <div class="buyShop" name="buyProduct">
 
 			<div class="product-box">
  
@@ -206,7 +206,7 @@
 		 
 		 </div>
 
-		 <div class="buyShop">
+		 <div class="buyShop" name="buyProduct">
 
 			<div class="product-box">
  
@@ -219,7 +219,7 @@
 		 
 		 </div>
 
-		 <div class="buyShop">
+		 <div class="buyShop" name="buyProduct">
 
 			<div class="product-box">
  
@@ -232,7 +232,7 @@
 		 
 		 </div>
 
-		 <div class="buyShop">
+		 <div class="buyShop" name="buyProduct">
 
 			<div class="product-box">
  
@@ -245,7 +245,7 @@
 		 
 		 </div>
 
-		 <div class="buyShop">
+		 <div class="buyShop" name="buyProduct">
 
 			<div class="product-box">
  
