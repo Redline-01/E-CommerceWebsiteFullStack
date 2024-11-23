@@ -178,7 +178,7 @@
         <input type="password" placeholder="Password" id="password" required>
         <div class="error" id="password-error"></div>
         </div>
-        <input type="submit" value="Login">
+        <input type="submit" value="Login" name="submit">
         
         
         </class></form></div>
