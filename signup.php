@@ -162,8 +162,8 @@
 	</section>
 
     <div class="form-container">
-        <form action="loginLogic.php" method="post"id="form" style="transform: rotateX(0deg) rotateY(0deg);">
-        <h3>Login</h3>
+        <form action="register.php" method="post" id="form" style="transform: rotateX(0deg) rotateY(0deg);">
+        <h3>Sign Up</h3>
         <class class="container">
        
         <input type="text" name="name" placeholder="Name" required>
@@ -178,7 +178,7 @@
         <input type="password" placeholder="Password" id="password" name="password" required>
         <input type="password" placeholder="Confirm Password" name="confirmpassword" required>
         
-        <input type="submit" value="Login">
+        <input type="submit" value="Sign Up">
         
         
         </class></form></div>

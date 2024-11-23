@@ -18,7 +18,7 @@
 		else{
 
 			
-			$sql = "SELECT id, name, surname, username, email, password, isadmin FROM users WHERE username=:username";
+			$sql = "SELECT id, name, surname, username, email, password, isadmin FROM login WHERE username=:username";
 
 			
 			$selectUser = $conn->prepare($sql);
