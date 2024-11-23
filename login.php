@@ -38,7 +38,7 @@
          perspective: 1000px; 
      } 
      .form-container form{ 
-         height:450px; 
+         height:350px; 
          width:350px; 
          background: rgba(255,255,255,.1); 
          text-align: center;
@@ -165,19 +165,12 @@
         <form action="loginLogic.php" method="post"id="form" style="transform: rotateX(0deg) rotateY(0deg);">
         <h3>Login</h3>
         <class class="container">
-        <span class="icon"><i class="fas fa-user"></i></span>
-        <input type="text" placeholder="Username" id="username" required>
-        <div class="error" id="name-error"></div>
-        <div class="container">
-        <span class="icon"></span>
-        <input type="email" placeholder="E-mail" id="email" required>
-        <div class="error" id="email-error"></div>
-        </div>
-        <div class="container">
-        <span class="icon"><i class="fas fa-lock"></i></span>
-        <input type="password" placeholder="Password" id="password" required>
-        <div class="error" id="password-error"></div>
-        </div>
+        
+        <input type="text" placeholder="Username" id="username" name="username" required>
+        
+        
+        <input type="password" placeholder="Password" id="password" name="password" required>
+       
         <input type="submit" value="Login" name="submit">
         
         

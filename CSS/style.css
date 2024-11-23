@@ -197,6 +197,15 @@ ul li:hover ul.dropdown{
 	font-family: "Afacad", sans-serif;
 	font-size: larger;
 }
+.verline{
+	width: 5px;
+	border: 1px solid #fefefe;
+	border-radius: 3px;
+	height: 40px;
+	background-color: #fefefe;
+	margin-top: 8px;
+}
+	
 
 
 	

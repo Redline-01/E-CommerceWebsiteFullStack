@@ -1,3 +1,21 @@
+<?php 
+
+    include_once('config.php');
+
+    if (empty($_SESSION['username'])) {
+          header("Location: login.php");
+    }
+   
+    $sql = "SELECT * FROM login";
+    $selectUsers = $conn->prepare($sql);
+    $selectUsers->execute();
+
+    $users_data = $selectUsers->fetchAll();
+    
+
+ ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,12 +48,15 @@
 				</div>
 				<nav>
 					<ul>
+						<li id="usernameDB"><a href="#"> <?php echo "Hello There ".$_SESSION['username']; ?> </a></li>
+						<div class="verline"></div>
 						<li class="active"><a href="project.php">Home</a></li>
 						<li><a href="products.php">Products</a></li>
 						<li><a href="shop.php">Shop</a></li>
 						<li><a href="#section-footer">About</a></li>
 						<li><a href="login.php">Login</a></li>
 						<li><a href="#section-footer">Contact</a>
+						
 					    
 						<ul class="dropdown">
 							<li><a href="https://www.facebook.com/hyperxcommunity" target="_blank"><i class='bx bxl-facebook-circle' style='color:#316ff6'></i> Facebook</a></li>
