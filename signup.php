@@ -178,7 +178,8 @@
         <input type="password" placeholder="Password" id="password" name="password" required>
         <input type="password" placeholder="Confirm Password" name="confirmpassword" required>
         
-        <input type="submit" value="Sign Up">
+        <input type="submit" value="Sign Up" name="submit"> 
+        
         
         
         </class></form></div>

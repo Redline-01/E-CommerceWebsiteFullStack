@@ -53,7 +53,7 @@
 					$_SESSION['isadmin'] = $data['isadmin'];
 
 				
-					header('Location: dashboard.php');
+					header('Location: project.php');
 				}
 				else{
 				

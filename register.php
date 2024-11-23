@@ -26,7 +26,7 @@
 		else
 		{
 
-			$sql = "INSERT INTO login (name,surname,username,email,password, confirmpassword) VALUES (:name, :surname, :username, :email, :password, :confirmpassword)";
+			$sql = "INSERT INTO login(name,surname,username,email,password, confirmpassword) VALUES (:name, :surname, :username, :email, :password, :confirmpassword)";
 
 			$insertSql = $conn->prepare($sql);
 			
@@ -40,7 +40,7 @@
 
 			$insertSql->execute();
 
-			header("Location: login.php");
+			header("Location:login.php");
 
 
 		}
