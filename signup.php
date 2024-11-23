@@ -18,7 +18,7 @@
   href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Login</title>
+    <title>SignUp</title>
     <style>
         * {    
              box-sizing: border-box;
@@ -38,8 +38,8 @@
          perspective: 1000px; 
      } 
      .form-container form{ 
-         height:450px; 
-         width:350px; 
+         height: 650px; 
+         width: 350px; 
          background: rgba(255,255,255,.1); 
          text-align: center;
          align-items: center;
@@ -129,7 +129,7 @@
 				</div>
 				<nav>
 					<ul>
-						<li class="active"><a href="project.php">Home</a></li>
+						<li class="active"><a href="project.html">Home</a></li>
 						<li><a href="products.php">Products</a></li>
 						<li><a href="shop.php">Shop</a></li>
 						<li><a href="#section-footer">About</a></li>
@@ -165,19 +165,19 @@
         <form action="loginLogic.php" method="post"id="form" style="transform: rotateX(0deg) rotateY(0deg);">
         <h3>Login</h3>
         <class class="container">
-        <span class="icon"><i class="fas fa-user"></i></span>
-        <input type="text" placeholder="Username" id="username" required>
-        <div class="error" id="name-error"></div>
-        <div class="container">
-        <span class="icon"></span>
-        <input type="email" placeholder="E-mail" id="email" required>
-        <div class="error" id="email-error"></div>
-        </div>
-        <div class="container">
-        <span class="icon"><i class="fas fa-lock"></i></span>
-        <input type="password" placeholder="Password" id="password" required>
-        <div class="error" id="password-error"></div>
-        </div>
+       
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="surname" placeholder="Surname" required> 
+        <input type="text" placeholder="Username" id="username" name="username" required>
+        
+
+        
+        <input type="email" placeholder="E-mail" id="email" name="email" required>
+        
+        
+        <input type="password" placeholder="Password" id="password" name="password" required>
+        <input type="password" placeholder="Confirm Password" name="confirmpassword" required>
+        
         <input type="submit" value="Login">
         
         

@@ -70,7 +70,7 @@
     <section id="section-1">
 		<div class="header">
 			<header>
-				<a href="project.html"><img src="images/hyperx.png" width="200px" height="100px"></a>
+				<a href="project.php"><img src="images/hyperx.png" width="200px" height="100px"></a>
 				<div class="hamburger">
 					<div class="line"></div>
 					<div class="line"></div>
@@ -78,11 +78,11 @@
 				</div>
 				<nav>
 					<ul>
-						<li><a href="project.html">Home</a></li>
-						<li><a href="products.html">Products</a></li>
-						<li class="active"><a href="shop.html">Shop</a></li>
+						<li><a href="project.php">Home</a></li>
+						<li><a href="products.php">Products</a></li>
+						<li class="active"><a href="shop.php">Shop</a></li>
 						<li><a href="#section-footer">About</a></li>
-                        <li><a href="login.html">Login</a></li>
+                        <li><a href="login.php">Login</a></li>
 						<li><a href="#section-footer">Contact</a>
                         
 							<ul class="dropdown">
@@ -319,23 +319,23 @@
 	
 		<div class="footer-content">
 			<h4>Main</h4>
-			<li><a href="project.html">Home</a></li>
-			<li><a href="products.html">Products</a></li>
-			<li><a href="shop.html">Shop</a></li>
+			<li><a href="project.php">Home</a></li>
+			<li><a href="products.php">Products</a></li>
+			<li><a href="shop.php">Shop</a></li>
 			<li><a href="#">Contact</a></li>
 		</div>
 	
 		<div class="footer-content">
 			<h4>Products</h4>
-			<li><a href="shop.html">HyperX Mouse</a></li>
-			<li><a href="shop.html">HyperX Keyboard</a></li>
-			<li><a href="shop.html">HyperX Headset</a></li>
-			<li><a href="shop.html">HyperX Monitor</a></li>
+			<li><a href="shop.php">HyperX Mouse</a></li>
+			<li><a href="shop.php">HyperX Keyboard</a></li>
+			<li><a href="shop.php">HyperX Headset</a></li>
+			<li><a href="shop.php">HyperX Monitor</a></li>
 		</div>
 	
 		<div class="footer-content">
 			<h4>Login</h4>
-			<li><a href="login.html">Log in</a></li>
+			<li><a href="login.php">Log in</a></li>
 			
 		</div>
 	
