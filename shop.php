@@ -1,3 +1,19 @@
+<?php 
+
+   include_once('config.php');
+
+    if (empty($_SESSION['username'])) {
+          header("Location: login.php");
+    }
+   
+    $sql = "SELECT * FROM login";
+    $selectUsers = $conn->prepare($sql);
+    $selectUsers->execute();
+
+    $users_data = $selectUsers->fetchAll();
+    
+
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,6 +94,8 @@
 				</div>
 				<nav>
 					<ul>
+					    <li id="usernameDB"><a href="#"> <?php echo "Hello There ".$_SESSION['username']; ?> </a></li>
+					    <div id="verline"></div>
 						<li><a href="project.php">Home</a></li>
 						<li><a href="products.php">Products</a></li>
 						<li class="active"><a href="shop.php">Shop</a></li>

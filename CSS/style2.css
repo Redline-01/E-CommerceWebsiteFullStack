@@ -126,6 +126,14 @@ margin-right: 15px;
 ul li:hover ul.dropdown{
 display: block;
 }
+#verline{
+	width: 5px;
+	border: 1px solid #fefefe;
+	border-radius: 3px;
+	height: 40px;
+	background-color: #fefefe;
+	margin-top: 8px;
+}
 
 #shopList{
     display: flex;

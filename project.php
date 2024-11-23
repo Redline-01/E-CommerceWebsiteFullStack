@@ -1,6 +1,7 @@
+
 <?php 
 
-    include_once('config.php');
+   include_once('config.php');
 
     if (empty($_SESSION['username'])) {
           header("Location: login.php");
@@ -49,12 +50,13 @@
 				<nav>
 					<ul>
 						<li id="usernameDB"><a href="#"> <?php echo "Hello There ".$_SESSION['username']; ?> </a></li>
-						<div class="verline"></div>
+						<div id="verline"></div>
 						<li class="active"><a href="project.php">Home</a></li>
 						<li><a href="products.php">Products</a></li>
 						<li><a href="shop.php">Shop</a></li>
 						<li><a href="#section-footer">About</a></li>
 						<li><a href="login.php">Login</a></li>
+						<li><a href="logout.php">Logout</a></li>
 						<li><a href="#section-footer">Contact</a>
 						
 					    
