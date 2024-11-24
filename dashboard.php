@@ -66,12 +66,7 @@
               Dashboard
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="edit.php">
-              <span data-feather="file"></span>
-              Edit Profile
-            </a>
-          </li>
+       
           
         </ul>
         <?php }else {?>
@@ -82,7 +77,7 @@
               </a>
             </li>
           <li class="nav-item">
-          <a class="nav-link" href="edit.php">
+          <a class="nav-link" href="editUsers.php">
             <span ></span>
             Edit Profile
           </a>
@@ -139,7 +134,8 @@
         </table>
       </div>
      <?php  } else {
-      
+        
+
     } ?>
     </main>
   </div>

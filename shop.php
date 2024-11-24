@@ -100,7 +100,7 @@
 						<li><a href="products.php">Products</a></li>
 						<li class="active"><a href="shop.php">Shop</a></li>
 						<li><a href="#section-footer">About</a></li>
-                        <li><a href="login.php">Login</a></li>
+                        <li><a href="logout.php">Logout</a></li>
 						<li><a href="#section-footer">Contact</a>
                         
 							<ul class="dropdown">
