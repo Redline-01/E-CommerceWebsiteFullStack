@@ -94,10 +94,10 @@
 				</div>
 				<nav>
 					<ul>
-					    <li id="usernameDB"><a href="#"> <?php echo "Hello There ".$_SESSION['username']; ?> </a></li>
+					    <li id="usernameDB"><a href="dashboard.php"> <?php echo "Hello There ".$_SESSION['username']; ?> </a></li>
 					    <div id="verline"></div>
 						<li><a href="project.php">Home</a></li>
-						<li><a href="products.php">Products</a></li>
+						<!-- <li><a href="products.php">Products</a></li> -->
 						<li class="active"><a href="shop.php">Shop</a></li>
 						<li><a href="#section-footer">About</a></li>
                         <li><a href="logout.php">Logout</a></li>
