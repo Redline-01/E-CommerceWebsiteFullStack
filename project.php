@@ -69,7 +69,7 @@
 						</ul>
 					</ul>
 				</nav>
-			</div>
+        </div>
 			
 			</header>
 			<script>
