@@ -102,6 +102,10 @@ nav ul li a:hover{
 		margin-bottom: 12px;
 
 	}
+	#verline{
+		display: none;
+	
+	}
 }
 ul li ul.dropdown li{
 	display: block;

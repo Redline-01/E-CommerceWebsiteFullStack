@@ -103,6 +103,9 @@ nav ul li a{
     margin-bottom: 12px;
 
 }
+#verline{
+  display: none;
+}
 }
 ul li ul.dropdown li{
 display: block;
