@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2024 at 07:25 PM
+-- Generation Time: Nov 26, 2024 at 08:19 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clientmessages`
+--
+
+CREATE TABLE `clientmessages` (
+  `id` int(100) NOT NULL,
+  `email` varchar(535) NOT NULL,
+  `message` varchar(535) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `clientmessages`
+--
+
+INSERT INTO `clientmessages` (`id`, `email`, `message`) VALUES
+(1, 'redon@gmail.com', 'test\r\n'),
+(4, 'redon@gmail.com', 'test');
 
 -- --------------------------------------------------------
 
@@ -44,7 +64,8 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`id`, `name`, `surname`, `username`, `email`, `password`, `confirmpassword`, `isadmin`) VALUES
 (1, 'Redon', 'Bytyqi', 'redline', 'redon@gmail.com', '$2y$10$rWrL3/25Aq3r4gHmpWL0eOX844q0iyuSju7o65RT1D7f6XCozIPKC', '$2y$10$S3WNz/VkBTDnC1GXAcvj5eXzzc.SumhhKJkYoxqi9xW56JyuLhBkS', ''),
-(2, 'redon', 'bytyqi', 'redline1', 'redon@gmail.com', '$2y$10$Voso.8LRGmEkhsNNkXRKc.a1sk5MxonXEy81Dbi2oJDUFcHNju5BS', '$2y$10$QLerN8n9dXKsC0MkDvtKN.KlDu1WfewbV9CCriia6MnyOJfwaTBMG', '');
+(2, 'redon', 'bytyqi', 'redline1', 'redon@gmail.com', '$2y$10$Voso.8LRGmEkhsNNkXRKc.a1sk5MxonXEy81Dbi2oJDUFcHNju5BS', '$2y$10$QLerN8n9dXKsC0MkDvtKN.KlDu1WfewbV9CCriia6MnyOJfwaTBMG', 'true'),
+(3, 'Besart', 'Ibishi', 'besartibishi', 'besart@gmail.com', '$2y$10$WhNJ4pN4RMS4YvffmzRiW.12lN8lIJuURPSSHDqfb07O7.Qzvnj6O', '$2y$10$V0MKo.QIkcH4XsN3RsdB.OdCP3ru.dSb1o.tlin8r7CALZ.BHZB8q', '');
 
 -- --------------------------------------------------------
 
@@ -66,6 +87,12 @@ CREATE TABLE `shopproducts` (
 --
 
 --
+-- Indexes for table `clientmessages`
+--
+ALTER TABLE `clientmessages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
@@ -82,10 +109,16 @@ ALTER TABLE `shopproducts`
 --
 
 --
+-- AUTO_INCREMENT for table `clientmessages`
+--
+ALTER TABLE `clientmessages`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `shopproducts`
