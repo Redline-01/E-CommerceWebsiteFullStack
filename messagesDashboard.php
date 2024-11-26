@@ -6,15 +6,14 @@
           header("Location: login.php");
     }
    
-    $sql = "SELECT * FROM login";
-    $selectUsers = $conn->prepare($sql);
-    $selectUsers->execute();
+    $sql = "SELECT * FROM clientmessages";
+    $selectMessages= $conn->prepare($sql);
+    $selectMessages->execute();
 
-    $users_data = $selectUsers->fetchAll();
+    $messages_data = $selectMessages->fetchAll();
     
 
  ?>
-
  <!DOCTYPE html>
  <html>
  <head>
@@ -90,7 +89,7 @@
             </li>
           <li class="nav-item">
           <a class="nav-link" href="editUsers.php">
-            <span ></span>
+            <span></span>
             Edit Profile
           </a>
         </li>
@@ -110,33 +109,25 @@
 
     <?php if ($_SESSION['isadmin'] == 'true') { ?>
 
-      <h2>Users</h2>
+      <h2>Messages</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">Id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Surname</th>
-              <th scope="col">Username</th>
               <th scope="col">Email</th>
-              <th scope="col">Update</th>
-              <th scope="col">Delete</th>
+              <th scope="col">Message</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($users_data as $user_data) { ?>
+            <?php foreach ($messages_data as $message_data) { ?>
 
                <tr>
-                <td><?php echo $user_data['id']; ?></td>
-                <td><?php echo $user_data['name']; ?></td>
-                <td><?php echo $user_data['surname']; ?></td>
-                <td><?php echo $user_data['username']; ?></td>
-                <td><?php echo $user_data['email']; ?></td>
+                <td><?php echo $message_data['id']; ?></td>
+                <td><?php echo $message_data['email']; ?></td>
+                <td><?php echo $message_data['message'] ?></td>
         
-                <td> <button class="btn btn-warning"><a href="updateUsers.php?id=<?= $user_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Update</a> </button> </td>
-           
-                <td> <button class="btn btn-danger"><a href="deleteUsers.php?id=<?= $user_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Delete</a> </button></td>
+               
               </tr>
               
            <?php  } ?>
