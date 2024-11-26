@@ -57,8 +57,7 @@
 				}
 				else{
 				
-					echo "The password is not valid
-					";
+					echo "The password is incorrect";
 				}
 
 			}
