@@ -151,13 +151,16 @@ display: block;
   margin-right: auto;
   
 }
+.buyShop .product-box{
+  border: 5px solid #cc6600;
+
+}
 .product-box{
 	border: 2px solid #cc6600;
-  border-radius: 5px;
+  border-radius: 10px;
 	width: 450px;
-	height: 450px;
+	height: 460px;
 	margin-left: 30px;
-
 }
 #buybtn{
 	position: relative;
