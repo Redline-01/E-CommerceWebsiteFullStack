@@ -203,7 +203,7 @@
 		<input type="email" id="email" placeholder="Your Email" name="email">
 	  </div>
 	  <div class="problem-box">
-		<textarea id="message" placeholder="Describe your problem here..." name="message"></textarea>
+		<input type="textarea" id="message" placeholder="Describe your problem here..." name="message"></textarea>
 	  </div>
 	  <button id="sendbtn" name="submit">Send</button>
 	</div>

@@ -248,6 +248,7 @@
 
 
 
+<form action="clientMessages.php" method="POST">
 <div class="chat-box" id="chat-box">
 	<div class="chat-icon" onclick="toggleChat()">
 	  <img src="images/chatbox.webp" alt="Chat Icon">
@@ -256,14 +257,15 @@
 	  <div class="header">Welcome to our support center! Do you need assistance with anything? Our team is here to help you resolve any issues or answer any questions you may have. Feel free to reach out to us and we'll do our best to assist you promptly. Your satisfaction is our top priority!</div>
 	  
 	  <div class="email-info">
-		<input type="email" id="email" placeholder="Your Email" required>
+		<input type="email" id="email" placeholder="Your Email" name="email">
 	  </div>
 	  <div class="problem-box">
-		<textarea id="message" placeholder="Describe your problem here..." required></textarea>
+		<input type="textarea" id="message" placeholder="Describe your problem here..." name="message"></textarea>
 	  </div>
-	  <button onclick="sendMessage()" id="sendbtn">Send</button>
+	  <button id="sendbtn" name="submit">Send</button>
 	</div>
   </div>
+</form>
 
 
     
