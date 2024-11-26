@@ -130,7 +130,7 @@
 				<nav>
 					<ul>
 						<li class="active"><a href="project.html">Home</a></li>
-						<li><a href="products.php">Products</a></li>
+						<!-- <li><a href="products.php">Products</a></li> -->
 						<li><a href="shop.php">Shop</a></li>
 						<li><a href="#section-footer">About</a></li>
                         <li><a href="login.php">Login</a></li>
