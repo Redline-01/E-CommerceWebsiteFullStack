@@ -6,7 +6,7 @@
           header("Location: login.php");
     }
    
-    $sql = "SELECT * FROM shopproducts";
+    $sql = "SELECT * FROM orders";
     $selectProducts = $conn->prepare($sql);
     $selectProducts->execute();
 
