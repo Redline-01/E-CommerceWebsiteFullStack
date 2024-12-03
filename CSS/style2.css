@@ -83,7 +83,7 @@ nav{
     overflow: hidden;
 }
 nav.active{
-    height: 550px;
+    height: 500px !important;
     z-index: 1;
 }
 nav ul{
