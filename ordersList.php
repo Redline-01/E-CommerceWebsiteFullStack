@@ -133,7 +133,7 @@
 
                <tr>
                 <td><?php echo $product_data['id']; ?></td>
-                <td><?php echo $product_data['nameProducts']; ?></td>
+                <td><?php echo $product_data['productName']; ?></td>
                 <td><?php echo $product_data['price']; ?></td>
                 <td> <button class="btn btn-success"><a href="updateUsers.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Approve</a> </button> </td>
            
