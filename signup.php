@@ -179,6 +179,7 @@
         <input type="password" placeholder="Confirm Password" name="confirmpassword" required>
         
         <input type="submit" value="Sign Up" name="submit"> 
+        <span>Already have an account? | <a href="login.php">Login</a></span>
         
         
         

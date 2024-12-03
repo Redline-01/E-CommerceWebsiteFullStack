@@ -38,7 +38,7 @@
          perspective: 1000px; 
      } 
      .form-container form{ 
-         height:350px; 
+         height:370px; 
          width:350px; 
          background: rgba(255,255,255,.1); 
          text-align: center;
@@ -172,6 +172,7 @@
         <input type="password" placeholder="Password" id="password" name="password" required>
        
         <input type="submit" value="Login" name="submit">
+        <span>Create an account | <a href="signup.php">Sign Up</a></span>
         
         
         </class></form></div>
