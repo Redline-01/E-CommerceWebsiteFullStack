@@ -78,6 +78,12 @@
               Client Messages
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="addProducts.php">
+              <span data-feather="home"></span>
+              Add New Products
+            </a>
+          </li>
        
           
         </ul>
