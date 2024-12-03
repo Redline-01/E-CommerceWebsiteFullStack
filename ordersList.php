@@ -6,14 +6,15 @@
           header("Location: login.php");
     }
    
-    $sql = "SELECT * FROM clientmessages";
-    $selectMessages= $conn->prepare($sql);
-    $selectMessages->execute();
+    $sql = "SELECT * FROM shopproducts";
+    $selectProducts = $conn->prepare($sql);
+    $selectProducts->execute();
 
-    $messages_data = $selectMessages->fetchAll();
+    $products_data = $selectProducts->fetchAll();
     
 
  ?>
+
  <!DOCTYPE html>
  <html>
  <head>
@@ -66,7 +67,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="dashboard.php">
+            <a class="nav-link active" aria-current="page" href="ordersList.php">
               <span data-feather="home"></span>
               Orders
             </a>
@@ -89,7 +90,7 @@
             </li>
           <li class="nav-item">
           <a class="nav-link" href="editUsers.php">
-            <span></span>
+            <span ></span>
             Edit Profile
           </a>
         </li>
@@ -109,25 +110,28 @@
 
     <?php if ($_SESSION['isadmin'] == 'true') { ?>
 
-      <h2>Messages</h2>
+      <h2>Order List</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Email</th>
-              <th scope="col">Message</th>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Approve</th>
+              <th scope="col">Decline</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($messages_data as $message_data) { ?>
+            <?php foreach ($products_data as $product_data) { ?>
 
                <tr>
-                <td><?php echo $message_data['id']; ?></td>
-                <td><?php echo $message_data['email']; ?></td>
-                <td><?php echo $message_data['message'] ?></td>
-        
-               
+                <td><?php echo $product_data['id']; ?></td>
+                <td><?php echo $product_data['nameProducts']; ?></td>
+                <td><?php echo $product_data['price']; ?></td>
+                <td> <button class="btn btn-success"><a href="updateUsers.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Approve</a> </button> </td>
+           
+                <td> <button class="btn btn-danger"><a href="deleteUsers.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Decline</a> </button></td>
               </tr>
               
            <?php  } ?>

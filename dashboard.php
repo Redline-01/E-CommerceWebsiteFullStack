@@ -115,7 +115,7 @@
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th scope="col">Id</th>
+              <th scope="col">ID</th>
               <th scope="col">Name</th>
               <th scope="col">Surname</th>
               <th scope="col">Username</th>
