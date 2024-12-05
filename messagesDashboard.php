@@ -62,7 +62,7 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="dashboard.php">
               <span data-feather="home"></span>
-              Dashboard
+              Edit Users
             </a>
           </li>
           <li class="nav-item">
