@@ -79,9 +79,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="addProducts.php">
+            <a class="nav-link active" aria-current="page" href="editProducts.php">
               <span data-feather="home"></span>
-              Add New Products
+              Add/Edit Products
             </a>
           </li>
        

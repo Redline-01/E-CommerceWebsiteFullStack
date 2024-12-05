@@ -6,11 +6,11 @@
           header("Location: login.php");
     }
    
-    $sql = "SELECT * FROM login";
-    $selectUsers = $conn->prepare($sql);
-    $selectUsers->execute();
+    $sql = "SELECT * FROM shopproducts";
+    $selectProducts = $conn->prepare($sql);
+    $selectProducts->execute();
 
-    $users_data = $selectUsers->fetchAll();
+    $products_data = $selectProducts->fetchAll();
     
 
  ?>
@@ -36,11 +36,11 @@
  
  
  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"><?php echo "Welcome to Dashboard ".$_SESSION['username']; ?></a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"><?php echo "Welcome to dashboard ".$_SESSION['username']; ?></a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  
+  <input class="form-control form-control-dark w-50" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
       <a class="nav-link px-3" href="logout.php">Sign out</a>
@@ -88,7 +88,7 @@
           
         </ul>
         <?php }else {?>
-          <li class="nav-item">
+            <li class="nav-item">
               <a class="nav-link" href="project.php">
                
                 Home
@@ -116,44 +116,45 @@
 
     <?php if ($_SESSION['isadmin'] == 'true') { ?>
 
-      <h2>Users</h2>
+      <h2>Edit Products</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Name</th>
-              <th scope="col">Surname</th>
-              <th scope="col">Username</th>
-              <th scope="col">Email</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">Product Price</th>
+              <th scope="col">Product Image</th>
               <th scope="col">Update</th>
               <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($users_data as $user_data) { ?>
+            <?php foreach ($products_data as $product_data) { ?>
 
                <tr>
-                <td><?php echo $user_data['id']; ?></td>
-                <td><?php echo $user_data['name']; ?></td>
-                <td><?php echo $user_data['surname']; ?></td>
-                <td><?php echo $user_data['username']; ?></td>
-                <td><?php echo $user_data['email']; ?></td>
+                <td><?php echo $product_data['id']; ?></td>
+                <td><?php echo $product_data['nameProducts']; ?></td>
+                <td><?php echo $product_data['price']; ?></td>
+                <td><?php echo $product_data['imageProducts']; ?></td>
+                
         
-                <td> <button class="btn btn-warning"><a href="updateUsers.php?id=<?= $user_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Update</a> </button> </td>
+                <td> <button class="btn btn-warning"> <a href="updateProductsForm.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Update</a></button></td>
            
-                <td> <button class="btn btn-danger"><a href="deleteUsers.php?id=<?= $user_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Delete</a> </button></td>
+                <td> <button class="btn btn-danger"><a href="deleteProducts.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Delete</a></button></td>
+               
+                
               </tr>
               
            <?php  } ?>
            
             
           </tbody>
+          <td> <button class="btn btn-success"><a href="addProducts.php" style="text-decoration:none; color:white; font-weight:bold;">Add</a></button></td>
         </table>
       </div>
      <?php  } else {
-        
-
+      
     } ?>
     </main>
   </div>

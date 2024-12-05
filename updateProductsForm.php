@@ -1,15 +1,24 @@
-<?php 
+<?php
 
-    include_once('config.php');
+    include_once("config.php");
 
-    if (empty($_SESSION['username'])) {
-          header("Location: login.php");
-    }
+    $id = $_GET['id'];
+
+    $sql = "SELECT * FROM shopproducts WHERE id=:id";
+
+    $selectProduct = $conn->prepare($sql);
+
+    $selectProduct->bindParam(":id", $id);
+
+    $selectProduct->execute();
     
+    $product_data = $selectProduct->fetch();
 
- ?>
+?>
 
- <!DOCTYPE html>
+
+
+<!DOCTYPE html>
  <html>
  <head>
  	<title>Dashboard</title>
@@ -30,11 +39,11 @@
  
  
  <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"><?php echo "Welcome to Dashboard ".$_SESSION['username']; ?></a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"><?php echo "Welcome to dashboard ".$_SESSION['username']; ?></a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  
+  <input class="form-control form-control-dark w-50" type="text" placeholder="Search" aria-label="Search">
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
       <a class="nav-link px-3" href="logout.php">Sign out</a>
@@ -47,95 +56,47 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
-           <?php if ($_SESSION['isadmin'] == 'true') { ?>
-            <li class="nav-item">
-              <a class="nav-link" href="project.php">
-                <span data-feather="file"></span>
-                Home
-              </a>
-            </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="dashboard.php">
               <span data-feather="home"></span>
               Dashboard
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="ordersList.php">
-              <span data-feather="home"></span>
-              Orders
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="messagesDashboard.php">
-              <span data-feather="home"></span>
-              Client Messages
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="editProducts.php">
-              <span data-feather="home"></span>
-              Add/Edit Products
-            </a>
-          </li>
-       
           
         </ul>
-        <?php }else {?>
-          <li class="nav-item">
-              <a class="nav-link" href="project.php">
-               
-                Home
-              </a>
-            </li>
-          <li class="nav-item">
-          <a class="nav-link" href="editUsers.php">
-            <span ></span>
-            Edit Profile
-          </a>
-        </li>
-        </ul>
-      <?php
-      } ?>
 
-        
+       
       </div>
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
-        
       </div>
 
-   
-
-        <h2>Add Products</h2>
-
-<form action="addProductsLogic.php" method="post">
-
- 
- <div class="form-floating">
-   <input type="text" class="form-control" id="floatingInput" placeholder="Product Name" name="nameProducts" >
-   <label for="floatingInput">Product Name</label>
- </div>
- <div class="form-floating">
-   <input type="text" class="form-control" id="floatingInput" placeholder="Product Price" name="price" >
-   <label for="floatingInput">Product Price</label>
- </div>
- <div class="form-floating">
-   <input type="file" class="form-control" id="floatingInput" placeholder="Product Image" name="imageProducts" >
-   <label for="floatingInput">Product Image</label>
- </div>
-  <button  class="w-100 btn btn-lg btn-primary" type="submit" name="submit"> Add Product </button> 
-</form>
-
-      
-           
-        
-         
-      </div>
     
+
+      <h2>Edit Products Details</h2>
+      <div class="table-responsive">
+        
+        <form action="updateProducts.php" method="POST">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Product Name" name="nameProducts" value="<?php echo  $product_data['nameProducts'] ?>">
+          <label for="floatingInput">Product Name</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Product Price" name="price" value="<?php echo  $product_data['price'] ?>">
+          <label for="floatingInput">Product Price</label>
+        </div>
+        <div class="form-floating">
+          <input type="file" class="form-control" id="floatingInput" placeholder="Product Image" name="imageProducts" value="<?php echo  $product_data['imageProducts'] ?>">
+          <label for="floatingInput">Product Image</label>
+        </div>
+        <br>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Change</button>
+      </form>
+
+
+      </div>
     </main>
   </div>
 </div>
