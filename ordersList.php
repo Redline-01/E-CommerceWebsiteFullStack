@@ -122,6 +122,7 @@
           <thead>
             <tr>
               <th scope="col">ID</th>
+              <th scope="col">Client</th>
               <th scope="col">Product</th>
               <th scope="col">Price</th>
               <th scope="col">Approve</th>
@@ -133,6 +134,7 @@
 
                <tr>
                 <td><?php echo $product_data['id']; ?></td>
+                <td><?php echo $product_data['client']; ?></td>
                 <td><?php echo $product_data['productName']; ?></td>
                 <td><?php echo $product_data['price']; ?></td>
                 <td> <button class="btn btn-success"><a href="updateUsers.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Approve</a> </button> </td>
