@@ -79,6 +79,8 @@
       <div class="table-responsive">
         
         <form action="updateProducts.php" method="POST">
+    
+
         <div class="form-floating">
           <input type="text" class="form-control" id="floatingInput" placeholder="Product Name" name="nameProducts" value="<?php echo  $product_data['nameProducts'] ?>">
           <label for="floatingInput">Product Name</label>
