@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2024 at 08:29 PM
+-- Generation Time: Dec 05, 2024 at 08:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -75,6 +75,7 @@ INSERT INTO `login` (`id`, `name`, `surname`, `username`, `email`, `password`, `
 
 CREATE TABLE `orders` (
   `id` int(255) NOT NULL,
+  `client` varchar(255) NOT NULL,
   `productname` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL,
   `approve` varchar(255) NOT NULL
@@ -89,11 +90,27 @@ CREATE TABLE `orders` (
 CREATE TABLE `shopproducts` (
   `id` int(50) NOT NULL,
   `nameProducts` varchar(255) NOT NULL,
-  `price` double NOT NULL,
+  `price` varchar(255) NOT NULL,
   `addToCart` varchar(255) NOT NULL,
   `addFavorite` varchar(255) NOT NULL,
   `imageProducts` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `shopproducts`
+--
+
+INSERT INTO `shopproducts` (`id`, `nameProducts`, `price`, `addToCart`, `addFavorite`, `imageProducts`) VALUES
+(6, 'HyperX Cloud Red II Headset', '$119.99', '', '', 'hyperxcloud2red.webp'),
+(7, 'HyperX Xbox Controller', '$69.99', '', '', 'hyperxcontroller.webp'),
+(8, 'HyperX Cloud II Headset', '$99.99', '', '', 'hyperxheadsetnew.webp'),
+(9, 'HyperX Keyboard', '$149.99', '', '', 'hyperxkeyboard.webp'),
+(10, 'HyperX Gaming Mic', '$129.99', '', '', 'hyperxmic.webp'),
+(11, 'HyperX Gaming Monitor', '$259.99', '', '', 'hyperxmonitor.webp'),
+(12, 'HyperX Black Mouse', '$69.99', '', '', 'hyperxmouse.webp'),
+(13, 'HyperX Keyboard Yellow', '$159.99', '', '', 'hyperxnewkeyboard.webp'),
+(14, 'HyperX Red Mouse', '$59.99', '', '', 'hyperxnewmouse.webp'),
+(15, 'HyperX Cloud Silver II Headset', '$99.99', '', '', 'hyperxcloud2.webp');
 
 --
 -- Indexes for dumped tables
@@ -149,7 +166,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `shopproducts`
 --
 ALTER TABLE `shopproducts`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
