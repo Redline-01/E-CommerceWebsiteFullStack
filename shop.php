@@ -362,8 +362,10 @@
 		</div>
 	
 		<div class="footer-content">
-			<h4>Login</h4>
-			<li><a href="login.php">Log in</a></li>
+			<h4>Login/Sign Up</h4>
+			<li><a href="login.php">Login</a></li>
+			<li><a href="signup.php">Sign up</a></li>
+
 			
 		</div>
 	
