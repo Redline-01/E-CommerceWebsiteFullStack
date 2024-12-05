@@ -11,6 +11,11 @@
     $selectUsers->execute();
 
     $users_data = $selectUsers->fetchAll();
+
+	$sql_1 = "SELECT * FROM shopproducts";
+   $selectProducts = $conn->prepare($sql_1);
+   $selectProducts->execute();
+   $products_data = $selectProducts->fetchAll();
     
 
  ?>
@@ -145,21 +150,26 @@
 		</div>
 	  </div>  
 	-->
+
+	<?php foreach ($products_data as $product_data) { ?>
 		  
      <div class="buyShop" name="buyProduct">
 
            <div class="product-box">
 
-			<img src="images/hyperxcloud2red.webp" width="300px" height="300px" class="product-image">
-			<h3 class="product-name">HyperX Cloud Red II Headset</h3>
+			<img src="images/<?php  echo $product_data['imageProducts']; ?>" width="300px" height="300px" class="product-image">
+			<h3 class="product-name"><?php echo $product_data['nameProducts']; ?></h3>
 			<button id="buybtn"><img class="img-shop" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAe1JREFUWEftlz0yhEEQhp+twikESEgkLoBE6gokZE5AoTiBjARHkEpwAYmExE+VU6CKfdV8W1OzO9Mzsz+1wXYimJ7uZ/vt6f60GDNrjRkPEyBLkbBCh8GFa+DdCjLI8xDot0fwI+B4kElTsXKAdH8buBoFVEqyubZcWw7iHljPAFoDVp3fA6B7RZZ6ZQK6a1dGf2XzGf2kHpTEsiqprWd/6VUpJ8HQgSSBqtSYVaWhAwnkzZPNau6RAPlJwubuNSZKXnWXr9VDzQW/Sr5stUDR15gL5De35pGkk9UC+fc0TjrjIRcot7lzesj30VpSxTuWCxQ2d2wE5AAlR0kJkKa2gsn0y1TqcPFaQBqy6sfGuvKXAOWMAAsoKZcSlAKlRoDiWbvMnGmlQDX7rZHHl6urmaMapqaaOyvdb01IS85/v9IKNbL4+63Z7tZv8f2iO7EGKGxuCyQ8j8pVWyHd88tfCpT8jKmtUPiicqE+rE/hfoByIYr8+gE6d0v2FdgDbiOZN4AzYMFN+t0UYS2Qv0YU/wVYiiR6Bha9s+RHXi3QPnDiJfkGZiJAX8C0d3YAnMaqVAu0DDy2A0+5wBdATApJu+P8foAV4GnQQIonqE3g03o57j+XWeAmBdPPHCp6OSXOtZKV5CjynQBZ5foDkI1sJb53g8kAAAAASUVORK5CYII="/> Add to Cart</button>
-			<h3 class="price">&euro; 99.99</h3>
+			<h3 class="price"><?php echo $product_data['price'];  ?></h3>
 			<div><img src="images/heart.png" width="40px" height="40px" class="heart-icon"></div>
 		   </div>
         
         </div>
 
-		<div class="buyShop" name="buyProduct">
+
+		<?php } ?>
+
+		<!-- <div class="buyShop" name="buyProduct">
 
 			<div class="product-box">
  
@@ -274,7 +284,7 @@
 			 <div><img src="images/heart.png" width="40px" height="40px" class="heart-icon"></div>
 			</div>
 		 
-		 </div>
+		 </div> -->
 
 		
 
