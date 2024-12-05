@@ -53,20 +53,64 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
+           <?php if ($_SESSION['isadmin'] == 'true') { ?>
+            <li class="nav-item">
+              <a class="nav-link" href="project.php">
+                <span data-feather="file"></span>
+                Home
+              </a>
+            </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="dashboard.php">
               <span data-feather="home"></span>
-              Dashboard
+              Edit Users
             </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="ordersList.php">
+              <span data-feather="home"></span>
+              Orders
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="messagesDashboard.php">
+              <span data-feather="home"></span>
+              Client Messages
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="editProducts.php">
+              <span data-feather="home"></span>
+              Add/Edit Products
+            </a>
+          </li>
+       
           
         </ul>
+        <?php }else {?>
+          <li class="nav-item">
+              <a class="nav-link" href="project.php">
+               
+                Home
+              </a>
+            </li>
+          <li class="nav-item">
+          <a class="nav-link" href="editUsers.php">
+            <span></span>
+            Edit Profile
+          </a>
+        </li>
+        </ul>
+      <?php
+      } ?>
 
-       
+        
       </div>
     </nav>
+
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -82,8 +126,8 @@
         <form action="editUsers.php" method="POST">
     
         <div class="form-floating">
-          <input type="number" class="form-control" id="floatingInput" placeholder="Id" name="id" value="<?php echo  $user_data['id'] ?>">
-          <label for="floatingInput">Id</label>
+          <input type="number" class="form-control" id="floatingInput" placeholder="ID" name="id" value="<?php echo  $user_data['id'] ?>">
+          <label for="floatingInput">ID</label>
         </div>
         <div class="form-floating">
           <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="name" value="<?php echo  $user_data['name'] ?>">
