@@ -53,18 +53,61 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
+           <?php if ($_SESSION['isadmin'] == 'true') { ?>
+            <li class="nav-item">
+              <a class="nav-link" href="project.php">
+                <span data-feather="file"></span>
+                Home
+              </a>
+            </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="dashboard.php">
               <span data-feather="home"></span>
               Dashboard
             </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="ordersList.php">
+              <span data-feather="home"></span>
+              Orders
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="messagesDashboard.php">
+              <span data-feather="home"></span>
+              Client Messages
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="editProducts.php">
+              <span data-feather="home"></span>
+              Add/Edit Products
+            </a>
+          </li>
+       
           
         </ul>
+        <?php }else {?>
+          <li class="nav-item">
+              <a class="nav-link" href="project.php">
+               
+                Home
+              </a>
+            </li>
+          <li class="nav-item">
+          <a class="nav-link" href="editUsers.php">
+            <span ></span>
+            Edit Profile
+          </a>
+        </li>
+        </ul>
+      <?php
+      } ?>
 
-       
+        
       </div>
     </nav>
 
@@ -80,7 +123,10 @@
         
         <form action="updateProducts.php" method="POST">
     
-
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput" placeholder="ID" name="id" value="<?php echo  $product_data['id'] ?>">
+          <label for="floatingInput">ID</label>
+        </div>
         <div class="form-floating">
           <input type="text" class="form-control" id="floatingInput" placeholder="Product Name" name="nameProducts" value="<?php echo  $product_data['nameProducts'] ?>">
           <label for="floatingInput">Product Name</label>

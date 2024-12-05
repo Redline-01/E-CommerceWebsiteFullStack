@@ -80,7 +80,7 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="editProducts.php">
               <span data-feather="home"></span>
-              Add/Edit New Products
+              Add/Edit Products
             </a>
           </li>
        
