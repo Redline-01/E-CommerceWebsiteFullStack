@@ -99,7 +99,7 @@
 				</div>
 				<nav>
 					<ul>
-					    <li id="usernameDB"><a href="dashboard.php"> <?php echo "Hello There ".$_SESSION['username']; ?> </a></li>
+					    <li id="usernameDB"><a href="dashboard.php"> <?php echo "Welcome, ".$_SESSION['username']; ?> </a></li>
 					    <div id="verline"></div>
 						<li><a href="project.php">Home</a></li>
 						<!-- <li><a href="products.php">Products</a></li> -->
