@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2024 at 08:30 PM
+-- Generation Time: Dec 06, 2024 at 10:13 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.1.25
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -110,7 +110,9 @@ INSERT INTO `shopproducts` (`id`, `nameProducts`, `price`, `addToCart`, `addFavo
 (12, 'HyperX Black Mouse', '$69.99', '', '', 'hyperxmouse.webp'),
 (13, 'HyperX Keyboard Yellow', '$159.99', '', '', 'hyperxnewkeyboard.webp'),
 (14, 'HyperX Red Mouse', '$59.99', '', '', 'hyperxnewmouse.webp'),
-(15, 'HyperX Cloud Silver II Headset', '$99.99', '', '', 'hyperxcloud2.webp');
+(15, 'HyperX Cloud Silver II Headset', '$99.99', '', '', 'hyperxcloud2.webp'),
+(16, 'Cloud MIX Buds 2', '$149.99', '', '', 'hyperxear.webp'),
+(17, 'OMEN 35L Gaming PC', '$1,549.99', '', '', 'omenpc.webp');
 
 --
 -- Indexes for dumped tables
@@ -166,7 +168,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `shopproducts`
 --
 ALTER TABLE `shopproducts`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
