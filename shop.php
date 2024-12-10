@@ -84,6 +84,7 @@
   cursor: pointer;
   
 }
+
 	</style>
 
 </head>
@@ -150,6 +151,9 @@
 		</div>
 	  </div>  
 	-->
+	<div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
+    </div>
 
 	<?php foreach ($products_data as $product_data) { ?>
 		  
@@ -405,4 +409,6 @@
 
 <script src="main.js"></script>
 <script src="main2.js"></script>
+<script src="searchproducts.js"></script>
+
 </html>
