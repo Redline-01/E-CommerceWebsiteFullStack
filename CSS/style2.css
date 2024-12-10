@@ -152,11 +152,12 @@ display: block;
   
 }
 .buyShop .product-box{
-  border: 5px solid #cc6600;
+  border: 5px solid;
+  border-color: red black black red;
 
 }
 .product-box{
-	border: 2px solid #cc6600;
+	border: 2px solid;
   border-radius: 10px;
 	width: 450px;
 	height: 460px;
@@ -168,8 +169,9 @@ display: block;
 	margin-right: auto;
 	margin-left: 150px;
   margin-top: 50px;
-	border: 1px solid #ff8000;
-	background-color: #ff8000;
+	border: 3px solid;
+  border-color: red black black red;
+	background-color: white;
 	height: 40px;
 	width: 170px;
 	border-radius: 5px;
@@ -177,8 +179,9 @@ display: block;
   font-size: 18px;
 }
 #buybtn:hover{
-	border: 1px solid #cc6600;
-	background-color: rgb(204,102,0);
+	border: 3px solid;
+  border-color: red black black red;
+	background-color: #d1d9e0;
 
 }
 .product-image{
@@ -208,14 +211,16 @@ display: block;
 .heart-icon{
   margin-left: 390px;
   margin-top: -73px;
-  border: 1px solid #ff8000;
-	background-color: #ff8000;
+  border: 3px solid;
+  border-color: red black black red;
+	background-color: red;
   border-radius: 5px;
   padding: 5px;
 }
 .heart-icon:hover{
-  border: 1px solid #cc6600;
-	background-color: rgb(204,102,0);
+  border: 3px solid;
+  border-color: red black black red;
+	background-color: #c60b00;
   cursor: pointer;
 }
 .product-name{
