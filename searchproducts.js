@@ -3,7 +3,7 @@ function searchProducts() {
     const products = document.querySelectorAll('.buyShop'); 
 
     products.forEach(product => {
-        const productName = product.getAttribute('nameProducts'); 
+        const productName = product.getAttribute('data-name'); 
 
        
         if (productName.includes(query)) {

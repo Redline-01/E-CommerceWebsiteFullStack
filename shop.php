@@ -157,7 +157,7 @@
 
 	<?php foreach ($products_data as $product_data) { ?>
 		  
-     <div class="buyShop" name="buyProduct">
+		<div class="buyShop" name="buyProduct" data-name="<?php echo strtolower($product_data['nameProducts']); ?>">
 
            <div class="product-box">
 
