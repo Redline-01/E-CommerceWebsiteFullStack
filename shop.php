@@ -383,7 +383,7 @@
 	
 	
 	
-	<form action="clientMessages.php" method="POST">
+	<form action="clientMessages1.php" method="POST">
 <div class="chat-box" id="chat-box">
 	<div class="chat-icon" onclick="toggleChat()">
 	  <img src="images/chatbox.webp" alt="Chat Icon">
