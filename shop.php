@@ -16,6 +16,8 @@
    $selectProducts = $conn->prepare($sql_1);
    $selectProducts->execute();
    $products_data = $selectProducts->fetchAll();
+
+   
     
 
  ?>
@@ -84,7 +86,95 @@
   cursor: pointer;
   
 }
+.cart-button {
+            position: fixed;
+            top: 150px;
+            right: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+        }
 
+        .shopping-cart {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: #f8f9fa;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+            transition: right 0.3s ease;
+            z-index: 9999;
+        }
+
+        .shopping-cart.open {
+            right: 0;
+        }
+
+        .shopping-cart-header {
+            padding: 20px;
+            background-color: #333030;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .cart-items {
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .cart-item span {
+            font-size: 16px;
+        }
+
+        .cart-item input {
+            width: 50px;
+            margin-left: 10px;
+            text-align: center;
+        }
+
+        .cart-total {
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        .continue-button {
+            display: block;
+            width: 90%;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #333030;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .close-cart {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+			color: white;
+        }
 	</style>
 
 </head>
@@ -135,27 +225,114 @@
 	</section>
 
     <section id="shopList">
-	<!--<div class="container">
-<div class="shopping">
-		<i class='bx bx-cart'></i>
-		<span class="quantity">0</span>
-</div>
-<div class="list"></div>
-</div>
-      <div class="card">
-		<h1>Card</h1>
-		<ul class="listCard"></ul>
-		<div class="checkOut">
-			<div class="total">0</div>
-			<div class="closeShopping">Close</div>
+	
+	<button class="cart-button" onclick="toggleCart()"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAbNJREFUWEftlzsyREEUhr+pwioESEgkNoBEagskZFZAoViBbCRYglTCCiQSEo8qq0AVc1Rf1bfv9POeuSaYTibo7nO++f/Tp/v2GLPRGzMeJkAxR1yFDp0NV8BrLIjmvAv0PST4EXCsmTQUKwVI9m8Dl11AhSybG9i1ZSDugPX/ALJzCtDtQBn5lTHfRT3Fjv2FpVIntRQDWjMqVcoJlOZ4A6Qc/k5yDEiSv1i2acJUsWr1mQIkvUlbGfuPiTpSn78jBWjUKtVqMxXILm5t22qnNxXILW4tqJpdOZaNyrZGK0lVSICka4t1mqORPwdIWyW5G+WOrI1cIM0WMPTCzgVy77dS+xrFnNuH7MQaLcB7L+YqJGAaLcD7cigBalvcXrty+5BtW5viDj5jShWqrFvNrGp5bgSfwm2AMlnSlrcB6pvG9gzsATeelBvAGbBgOv1uCK0UyL1GnoAlT6JHYNGaC37BlALtAydWkk9gxgP0AUxbcwfAqU+lUqBl4H4QeMoEPgd8Voi1O2bdF7ACPGgDSTyB2gTeYyfHvBRmgesQTJs+lHZkClaVWlaQKm3LBCim0w9/s0MlLyUdKwAAAABJRU5ErkJggg=="/></button>
+
+<div class="shopping-cart" id="shoppingCart">
+	<button class="close-cart" onclick="toggleCart()">&times;</button>
+	<div class="shopping-cart-header">Your Cart</div>
+	<div class="cart-items">
+		<div class="cart-item">
+			
+			
 		</div>
-	  </div>  
-	-->
+	</div>
+	<div class="cart-total" id="cartTotal">Total: </div>
+	<a href="#" class="continue-button">Continue</a>
+</div>
+
+<script>
+	function toggleCart() {
+		const cart = document.getElementById('shoppingCart');
+		cart.classList.toggle('open');
+	}
+
+	function updateTotal() {
+		const cartItems = document.querySelectorAll('.cart-item');
+		let total = 0;
+
+		cartItems.forEach(item => {
+			const quantity = item.querySelector('input').value;
+			const price = item.querySelector('input').dataset.price;
+			total += quantity * price;
+		});
+
+		document.getElementById('cartTotal').textContent = `Total: $${total.toFixed(2)}`;
+	}
+
+	let cart = []; 
+
+   
+    function addToCart(productName, productPrice) {
+  
+        let existingProduct = cart.find(item => item.name === productName);
+
+        if (existingProduct) {
+        
+            existingProduct.quantity++;
+        } else {
+            
+            cart.push({
+                name: productName,
+                price: parseFloat(productPrice),
+                quantity: 1
+            });
+        }
+
+        updateCart();
+    }
+
+ 
+    function updateCart() {
+        const cartItemsContainer = document.querySelector('.cart-items');
+        const cartTotal = document.getElementById('cartTotal');
+
+      
+        cartItemsContainer.innerHTML = '';
+
+    
+        let total = 0;
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+
+            cartItemsContainer.innerHTML += `
+                <div class="cart-item">
+                    <span>${item.name}</span>
+                    <span>$${item.price.toFixed(2)}</span>
+                    <input type="number" value="${item.quantity}" min="1" data-name="${item.name}" data-price="${item.price}" onchange="updateQuantity(event)">
+                </div>
+            `;
+        });
+
+        
+        cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    
+    function updateQuantity(event) {
+        const input = event.target;
+        const productName = input.dataset.name;
+        const newQuantity = parseInt(input.value);
+
+        
+        let product = cart.find(item => item.name === productName);
+        if (product) {
+            product.quantity = newQuantity;
+            updateCart();
+        }
+    }
+	console.log(product);
+</script>
+
 	<div class="search-container">
         <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
     </div>
 
-	<?php foreach ($products_data as $product_data) { ?>
+	<?php foreach ($products_data as $product_data) {
+		$price = floatval($product_data['price']);
+		
+		?>
 		  
 		<div class="buyShop" name="buyProduct" data-name="<?php echo strtolower($product_data['nameProducts']); ?>">
 
@@ -163,8 +340,10 @@
 
 			<img src="images/<?php  echo $product_data['imageProducts']; ?>" width="300px" height="300px" class="product-image">
 			<h3 class="product-name"><?php echo $product_data['nameProducts']; ?></h3>
-			<button id="buybtn"><img class="img-shop" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAe1JREFUWEftlz0yhEEQhp+twikESEgkLoBE6gokZE5AoTiBjARHkEpwAYmExE+VU6CKfdV8W1OzO9Mzsz+1wXYimJ7uZ/vt6f60GDNrjRkPEyBLkbBCh8GFa+DdCjLI8xDot0fwI+B4kElTsXKAdH8buBoFVEqyubZcWw7iHljPAFoDVp3fA6B7RZZ6ZQK6a1dGf2XzGf2kHpTEsiqprWd/6VUpJ8HQgSSBqtSYVaWhAwnkzZPNau6RAPlJwubuNSZKXnWXr9VDzQW/Sr5stUDR15gL5De35pGkk9UC+fc0TjrjIRcot7lzesj30VpSxTuWCxQ2d2wE5AAlR0kJkKa2gsn0y1TqcPFaQBqy6sfGuvKXAOWMAAsoKZcSlAKlRoDiWbvMnGmlQDX7rZHHl6urmaMapqaaOyvdb01IS85/v9IKNbL4+63Z7tZv8f2iO7EGKGxuCyQ8j8pVWyHd88tfCpT8jKmtUPiicqE+rE/hfoByIYr8+gE6d0v2FdgDbiOZN4AzYMFN+t0UYS2Qv0YU/wVYiiR6Bha9s+RHXi3QPnDiJfkGZiJAX8C0d3YAnMaqVAu0DDy2A0+5wBdATApJu+P8foAV4GnQQIonqE3g03o57j+XWeAmBdPPHCp6OSXOtZKV5CjynQBZ5foDkI1sJb53g8kAAAAASUVORK5CYII="/> Add to Cart</button>
-			<h3 class="price"><?php echo $product_data['price'];  ?></h3>
+			<button id="buybtn" onclick="addToCart('<?php echo addslashes($product_data['nameProducts']); ?>', '<?php echo $product_data['price']; ?>')">
+            <img class="img-shop" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAe1JREFUWEftlz0yhEEQhp+twikESEgkLoBE6gokZE5AoTiBjARHkEpwAYmExE+VU6CKfdV8W1OzO9Mzsz+1wXYimJ7uZ/vt6f60GDNrjRkPEyBLkbBCh8GFa+DdCjLI8xDot0fwI+B4kElTsXKAdH8buBoFVEqyubZcWw7iHljPAFoDVp3fA6B7RZZ6ZQK6a1dGf2XzGf2kHpTEsiqprWd/6VUpJ8HQgSSBqtSYVaWhAwnkzZPNau6RAPlJwubuNSZKXnWXr9VDzQW/Sr5stUDR15gL5De35pGkk9UC+fc0TjrjIRcot7lzesj30VpSxTuWCxQ2d2wE5AAlR0kJkKa2gsn0y1TqcPFaQBqy6sfGuvKXAOWMAAsoKZcSlAKlRoDiWbvMnGmlQDX7rZHHl6urmaMapqaaOyvdb01IS85/v9IKNbL4+63Z7tZv8f2iO7EGKGxuCyQ8j8pVWyHd88tfCpT8jKmtUPiicqE+rE/hfoByIYr8+gE6d0v2FdgDbiOZN4AzYMFN+t0UYS2Qv0YU/wVYiiR6Bha9s+RHXi3QPnDiJfkGZiJAX8C0d3YAnMaqVAu0DDy2A0+5wBdATApJu+P8foAV4GnQQIonqE3g03o57j+XWeAmBdPPHCp6OSXOtZKV5CjynQBZ5foDkI1sJb53g8kAAAAASUVORK5CYII="/> Add to Cart
+        </button>
+		<h3 class="price">&euro; <?php echo number_format($price, 2); ?></h3>
 			<div><img src="images/heart.png" width="40px" height="40px" class="heart-icon"></div>
 		   </div>
         

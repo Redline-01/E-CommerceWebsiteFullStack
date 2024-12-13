@@ -81,6 +81,7 @@ nav{
     background: #333030;
     transition: 0.2s;
     overflow: hidden;
+    
 }
 nav.active{
     height: 500px !important;
