@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2024 at 08:46 PM
+-- Generation Time: Dec 13, 2024 at 05:44 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.1.25
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,8 @@ INSERT INTO `clientmessages` (`id`, `email`, `message`) VALUES
 (5, 'redon@gmail.com', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageM'),
 (6, 'lorem@ipsum.com', 'Lorem ipsum '),
 (7, 'lorem@ipsum.com', 'iusbafbuifba'),
-(8, 'lorem@ipsum.com', 'dwadawda');
+(8, 'lorem@ipsum.com', 'dwadawda'),
+(9, 'redon@gmail.com', 'test test');
 
 -- --------------------------------------------------------
 
@@ -93,7 +94,7 @@ CREATE TABLE `orders` (
 CREATE TABLE `shopproducts` (
   `id` int(50) NOT NULL,
   `nameProducts` varchar(255) NOT NULL,
-  `price` varchar(255) NOT NULL,
+  `price` float NOT NULL,
   `addToCart` varchar(255) NOT NULL,
   `addFavorite` varchar(255) NOT NULL,
   `imageProducts` varchar(255) NOT NULL
@@ -104,18 +105,18 @@ CREATE TABLE `shopproducts` (
 --
 
 INSERT INTO `shopproducts` (`id`, `nameProducts`, `price`, `addToCart`, `addFavorite`, `imageProducts`) VALUES
-(6, 'HyperX Cloud Red II Headset', '$119.99', '', '', 'hyperxcloud2red.webp'),
-(7, 'HyperX Xbox Controller', '$69.99', '', '', 'hyperxcontroller.webp'),
-(8, 'HyperX Cloud II Headset', '$99.99', '', '', 'hyperxheadsetnew.webp'),
-(9, 'HyperX Keyboard', '$149.99', '', '', 'hyperxkeyboard.webp'),
-(10, 'HyperX Gaming Mic', '$129.99', '', '', 'hyperxmic.webp'),
-(11, 'HyperX Gaming Monitor', '$259.99', '', '', 'hyperxmonitor.webp'),
-(12, 'HyperX Black Mouse', '$69.99', '', '', 'hyperxmouse.webp'),
-(13, 'HyperX Keyboard Yellow', '$159.99', '', '', 'hyperxnewkeyboard.webp'),
-(14, 'HyperX Red Mouse', '$59.99', '', '', 'hyperxnewmouse.webp'),
-(15, 'HyperX Cloud Silver II Headset', '$99.99', '', '', 'hyperxcloud2.webp'),
-(16, 'Cloud MIX Buds 2', '$149.99', '', '', 'hyperxear.webp'),
-(17, 'OMEN 35L Gaming PC', '$1,549.99', '', '', 'omenpc.webp');
+(6, 'HyperX Cloud Red II Headset', 99.99, '', '', 'hyperxcloud2red.webp'),
+(7, 'HyperX Xbox Controller', 69.99, '', '', 'hyperxcontroller.webp'),
+(8, 'HyperX Cloud II Headset', 99.99, '', '', 'hyperxheadsetnew.webp'),
+(9, 'HyperX Keyboard', 149.99, '', '', 'hyperxkeyboard.webp'),
+(10, 'HyperX Gaming Mic', 129.99, '', '', 'hyperxmic.webp'),
+(11, 'HyperX Gaming Monitor', 259.99, '', '', 'hyperxmonitor.webp'),
+(12, 'HyperX Black Mouse', 69.99, '', '', 'hyperxmouse.webp'),
+(13, 'HyperX Keyboard Yellow', 159.99, '', '', 'hyperxnewkeyboard.webp'),
+(14, 'HyperX Red Mouse', 59.99, '', '', 'hyperxnewmouse.webp'),
+(15, 'HyperX Cloud Silver II Headset', 99.99, '', '', 'hyperxcloud2.webp'),
+(16, 'Cloud MIX Buds 2', 89.99, '', '', 'hyperxear.webp'),
+(17, 'OMEN 35L Gaming PC', 1599.99, '', '', 'omenpc.webp');
 
 --
 -- Indexes for dumped tables
@@ -153,7 +154,7 @@ ALTER TABLE `shopproducts`
 -- AUTO_INCREMENT for table `clientmessages`
 --
 ALTER TABLE `clientmessages`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `login`
