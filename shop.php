@@ -86,16 +86,26 @@
   cursor: pointer;
   
 }
-.cart-button {
-            position: fixed;
-            top: 150px;
-            right: 20px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000;
+#cartbutton {
+	position: fixed;
+	top: 150px;
+	right: 10px;
+    cursor: pointer;
+     z-index: 1;
         }
+		.cart-button{
+	   padding: 10px 20px;
+       cursor: pointer;
+       background-color: white;
+       color: white;
+       border: none;
+       border-radius: 50px;
+	   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+		}
+		.cart-button:hover{
+			background-color: #f8f9fa;
+		}
 
         .shopping-cart {
             position: fixed;
@@ -226,8 +236,9 @@
 
     <section id="shopList">
 	
+	<div id="cartbutton">
 	<button class="cart-button" onclick="toggleCart()"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAbNJREFUWEftlzsyREEUhr+pwioESEgkNoBEagskZFZAoViBbCRYglTCCiQSEo8qq0AVc1Rf1bfv9POeuSaYTibo7nO++f/Tp/v2GLPRGzMeJkAxR1yFDp0NV8BrLIjmvAv0PST4EXCsmTQUKwVI9m8Dl11AhSybG9i1ZSDugPX/ALJzCtDtQBn5lTHfRT3Fjv2FpVIntRQDWjMqVcoJlOZ4A6Qc/k5yDEiSv1i2acJUsWr1mQIkvUlbGfuPiTpSn78jBWjUKtVqMxXILm5t22qnNxXILW4tqJpdOZaNyrZGK0lVSICka4t1mqORPwdIWyW5G+WOrI1cIM0WMPTCzgVy77dS+xrFnNuH7MQaLcB7L+YqJGAaLcD7cigBalvcXrty+5BtW5viDj5jShWqrFvNrGp5bgSfwm2AMlnSlrcB6pvG9gzsATeelBvAGbBgOv1uCK0UyL1GnoAlT6JHYNGaC37BlALtAydWkk9gxgP0AUxbcwfAqU+lUqBl4H4QeMoEPgd8Voi1O2bdF7ACPGgDSTyB2gTeYyfHvBRmgesQTJs+lHZkClaVWlaQKm3LBCim0w9/s0MlLyUdKwAAAABJRU5ErkJggg=="/></button>
-
+    </div>
 <div class="shopping-cart" id="shoppingCart">
 	<button class="close-cart" onclick="toggleCart()">&times;</button>
 	<div class="shopping-cart-header">Your Cart</div>

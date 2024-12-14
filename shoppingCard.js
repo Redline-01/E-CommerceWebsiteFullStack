@@ -1,6 +1,7 @@
 function toggleCart() {
     const cart = document.getElementById('shoppingCart');
     cart.classList.toggle('open');
+   
 }
 
 function updateTotal() {
@@ -45,6 +46,13 @@ function updateCart() {
 
   
     cartItemsContainer.innerHTML = '';
+
+    if (cart.length === 0) {
+        
+        cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
+        cartTotal.textContent = 'Total: $0.00';
+        return;
+    }
 
 
     let total = 0;
