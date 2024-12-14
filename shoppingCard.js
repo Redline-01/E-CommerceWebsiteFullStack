@@ -70,7 +70,7 @@ function updateCart() {
                 <span>${item.name}</span>
                 <span>&euro;${item.price.toFixed(2)}</span>
                 <input type="number" value="${item.quantity}" min="1" data-name="${item.name}" data-price="${item.price}" onchange="updateQuantity(event)">
-                <button class="removebtn" onclick="deleteItem(${cart.indexOf(item)})">X</button>
+                <button class="removebtn" onclick="deleteItem(event, ${cart.indexOf(item)})">X</button>
             </div>
         `;
     });
@@ -82,7 +82,9 @@ function updateCart() {
     
 };
 
-function deleteItem(index) {
+function deleteItem(event, index) {
+    event.preventDefault();
+    event.stopPropagation();
     cart.splice(index, 1);
 
     updateCart();
