@@ -5,7 +5,7 @@ function toggleCart() {
     cart.classList.toggle('open');
     overlay.classList.toggle('active');
    
-}
+};
 
 function updateTotal() {
     const cartItems = document.querySelectorAll('.cart-item');
@@ -18,7 +18,7 @@ function updateTotal() {
     });
 
     document.getElementById('cartTotal').textContent = `Total: $${total.toFixed(2)}`;
-}
+};
 
 let cart = []; 
 
@@ -42,7 +42,7 @@ function addToCart(productName, productPrice) {
    
     updateCart();
     updateNotificationDot();
-}
+};
 
 
 function updateCart() {
@@ -55,10 +55,10 @@ function updateCart() {
     if (cart.length === 0) {
         
         cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
-        cartTotal.textContent = 'Total: $0.00';
+        cartTotal.innerHTML = 'Total: $0.00';
         return;
     }
-
+    
 
     let total = 0;
     cart.forEach(item => {
@@ -68,15 +68,17 @@ function updateCart() {
         cartItemsContainer.innerHTML += `
             <div class="cart-item">
                 <span>${item.name}</span>
-                <span>$${item.price.toFixed(2)}</span>
+                <span>&euro;${item.price.toFixed(2)}</span>
                 <input type="number" value="${item.quantity}" min="1" data-name="${item.name}" data-price="${item.price}" onchange="updateQuantity(event)">
             </div>
         `;
     });
 
+
     
-    cartTotal.textContent = `Total: $${total.toFixed(2)}`;
-}
+    cartTotal.innerHTML = `Total: €${total.toFixed(2)}`;
+};
+
 
 
 function updateQuantity(event) {
@@ -91,7 +93,7 @@ function updateQuantity(event) {
         updateCart();
         updateNotificationDot();
     }
-}
+};
 
 function updateNotificationDot() {
     const notificationDot = document.getElementById('notification-dot');
@@ -106,7 +108,7 @@ function updateNotificationDot() {
     } else {
         notificationDot.style.display = 'none'; 
     }
-}
+};
 
 document.addEventListener('click', function(event) {
     const cart = document.getElementById('shoppingCart');

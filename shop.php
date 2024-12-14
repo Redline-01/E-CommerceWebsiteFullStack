@@ -115,8 +115,8 @@
         .shopping-cart {
             position: fixed;
             top: 0;
-            right: -300px;
-            width: 300px;
+            right: -400px;
+            width: 400px;
             height: 100%;
             background-color: #f8f9fa;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
@@ -168,14 +168,14 @@
 
         .continue-button {
             display: block;
-            width: 90%;
+            width: 95%;
             margin: 20px auto;
             padding: 10px;
             background-color: #333030;
             color: white;
             text-align: center;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
             text-decoration: none;
         }
