@@ -54,7 +54,7 @@ function updateCart() {
 
     if (cart.length === 0) {
         
-        cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
+        cartItemsContainer.innerHTML = '<p id="cartempty">Your cart is empty</p>';
         cartTotal.innerHTML = 'Total: $0.00';
         return;
     }
@@ -70,6 +70,7 @@ function updateCart() {
                 <span>${item.name}</span>
                 <span>&euro;${item.price.toFixed(2)}</span>
                 <input type="number" value="${item.quantity}" min="1" data-name="${item.name}" data-price="${item.price}" onchange="updateQuantity(event)">
+                <button class="removebtn" onclick="deleteItem(${cart.indexOf(item)})">X</button>
             </div>
         `;
     });
@@ -77,7 +78,17 @@ function updateCart() {
 
     
     cartTotal.innerHTML = `Total: €${total.toFixed(2)}`;
+
+    
 };
+
+function deleteItem(index) {
+    cart.splice(index, 1);
+
+    updateCart();
+    updateNotificationDot();
+}
+
 
 
 

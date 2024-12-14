@@ -220,6 +220,20 @@
 #overlay.active{
 	display: block;
 }
+#cardempty{
+	text-align: center;
+}
+.removebtn{
+	background-color: #f8f9fa;
+	color: red;
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 16px;
+	margin-left: 10px;
+	font-weight: bold;	
+}
 
 	</style>
 
