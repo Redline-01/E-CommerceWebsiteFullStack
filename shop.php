@@ -207,6 +207,20 @@
     z-index: 2;
 } 
 
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 9; 
+    display: none; 
+}
+#overlay.active{
+	display: block;
+}
+
 	</style>
 
 </head>
@@ -263,6 +277,7 @@
     
 </div>
 
+<div id="overlay"></div>
 <div class="shopping-cart" id="shoppingCart">
 	<button class="close-cart" onclick="toggleCart()">&times;</button>
 	<div class="shopping-cart-header">Your Cart</div>
