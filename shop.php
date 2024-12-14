@@ -153,7 +153,7 @@
         }
 
         .cart-item input {
-            width: 65px;
+            width: 63px;
             margin-left: 10px;
             text-align: center;
         }
