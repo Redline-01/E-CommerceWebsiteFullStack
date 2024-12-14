@@ -88,11 +88,16 @@
 }
 #cartbutton {
 	position: fixed;
-	top: 150px;
-	right: 10px;
+	top: 190px;
+	right: 15px;
     cursor: pointer;
-     z-index: 1;
+    z-index: 1;
         }
+		/* .fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+    } */
 		.cart-button{
 	   padding: 10px 20px;
        cursor: pointer;
@@ -185,6 +190,23 @@
             cursor: pointer;
 			color: white;
         }
+		#notification-dot {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: none; 
+    text-align: center;
+    line-height: 15px;
+    z-index: 2;
+} 
+
 	</style>
 
 </head>
@@ -237,8 +259,10 @@
     <section id="shopList">
 	
 	<div id="cartbutton">
-	<button class="cart-button" onclick="toggleCart()"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAbNJREFUWEftlzsyREEUhr+pwioESEgkNoBEagskZFZAoViBbCRYglTCCiQSEo8qq0AVc1Rf1bfv9POeuSaYTibo7nO++f/Tp/v2GLPRGzMeJkAxR1yFDp0NV8BrLIjmvAv0PST4EXCsmTQUKwVI9m8Dl11AhSybG9i1ZSDugPX/ALJzCtDtQBn5lTHfRT3Fjv2FpVIntRQDWjMqVcoJlOZ4A6Qc/k5yDEiSv1i2acJUsWr1mQIkvUlbGfuPiTpSn78jBWjUKtVqMxXILm5t22qnNxXILW4tqJpdOZaNyrZGK0lVSICka4t1mqORPwdIWyW5G+WOrI1cIM0WMPTCzgVy77dS+xrFnNuH7MQaLcB7L+YqJGAaLcD7cigBalvcXrty+5BtW5viDj5jShWqrFvNrGp5bgSfwm2AMlnSlrcB6pvG9gzsATeelBvAGbBgOv1uCK0UyL1GnoAlT6JHYNGaC37BlALtAydWkk9gxgP0AUxbcwfAqU+lUqBl4H4QeMoEPgd8Voi1O2bdF7ACPGgDSTyB2gTeYyfHvBRmgesQTJs+lHZkClaVWlaQKm3LBCim0w9/s0MlLyUdKwAAAABJRU5ErkJggg=="/></button>
-    </div>
+	<button class="cart-button" onclick="toggleCart()"><span id="notification-dot"></span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAbNJREFUWEftlzsyREEUhr+pwioESEgkNoBEagskZFZAoViBbCRYglTCCiQSEo8qq0AVc1Rf1bfv9POeuSaYTibo7nO++f/Tp/v2GLPRGzMeJkAxR1yFDp0NV8BrLIjmvAv0PST4EXCsmTQUKwVI9m8Dl11AhSybG9i1ZSDugPX/ALJzCtDtQBn5lTHfRT3Fjv2FpVIntRQDWjMqVcoJlOZ4A6Qc/k5yDEiSv1i2acJUsWr1mQIkvUlbGfuPiTpSn78jBWjUKtVqMxXILm5t22qnNxXILW4tqJpdOZaNyrZGK0lVSICka4t1mqORPwdIWyW5G+WOrI1cIM0WMPTCzgVy77dS+xrFnNuH7MQaLcB7L+YqJGAaLcD7cigBalvcXrty+5BtW5viDj5jShWqrFvNrGp5bgSfwm2AMlnSlrcB6pvG9gzsATeelBvAGbBgOv1uCK0UyL1GnoAlT6JHYNGaC37BlALtAydWkk9gxgP0AUxbcwfAqU+lUqBl4H4QeMoEPgd8Voi1O2bdF7ACPGgDSTyB2gTeYyfHvBRmgesQTJs+lHZkClaVWlaQKm3LBCim0w9/s0MlLyUdKwAAAABJRU5ErkJggg=="/></button>
+    
+</div>
+
 <div class="shopping-cart" id="shoppingCart">
 	<button class="close-cart" onclick="toggleCart()">&times;</button>
 	<div class="shopping-cart-header">Your Cart</div>
@@ -249,7 +273,7 @@
 		</div>
 	</div>
 	<div class="cart-total" id="cartTotal">Total: </div>
-	<a href="#" class="continue-button">Continue</a>
+	<a href="checkout.php" class="continue-button">Continue</a>
 </div>
 
 
