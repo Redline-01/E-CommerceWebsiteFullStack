@@ -324,7 +324,7 @@ $totalPrice = array_sum(array_column($cartItems, 'price'));
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                    <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email">
                     <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
                 </div>
