@@ -302,7 +302,7 @@
 		</div>
 	</div>
 	<div class="cart-total" id="cartTotal">Total: </div>
-	<a href="checkout.php" class="continue-button">Continue</a>
+	<a href="checkout.php" class="continue-button">Continue to Checkout</a>
 </div>
 
 
