@@ -11,6 +11,8 @@
     $selectProducts->execute();
 
     $products_data = $selectProducts->fetchAll();
+
+    
     
 
  ?>
@@ -95,9 +97,15 @@
               </a>
             </li>
           <li class="nav-item">
-          <a class="nav-link" href="editUsers.php">
+          <a class="nav-link" href="updateUsers.php">
             <span ></span>
             Edit Profile
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="ordersList.php">
+            <span data-feather="home"></span>
+            Your Orders
           </a>
         </li>
         </ul>
@@ -114,7 +122,7 @@
         
       </div>
 
-    <?php if ($_SESSION['isadmin'] == 'true') { ?>
+   
 
       <h2>Order List</h2>
       <div class="table-responsive">
@@ -123,35 +131,51 @@
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Client</th>
-              <th scope="col">Product</th>
+              <th scope="col">E-mail</th>
+              <th scope="col">Address</th>
+              <th scope="col">Product(s)</th>
               <th scope="col">Price</th>
-              <th scope="col">Approve</th>
-              <th scope="col">Decline</th>
+              <th scope="col">Confirmation</th>
+              
             </tr>
           </thead>
           <tbody>
+          <?php if ($_SESSION['isadmin'] == 'true') { ?>
             <?php foreach ($products_data as $product_data) { ?>
 
                <tr>
                 <td><?php echo $product_data['id']; ?></td>
                 <td><?php echo $product_data['client']; ?></td>
-                <td><?php echo $product_data['productName']; ?></td>
+                <td><?php echo $product_data['email']; ?></td>
+                <td><?php echo $product_data['address']; ?></td>
+                <td><?php echo $product_data['productname']; ?></td>
                 <td><?php echo $product_data['price']; ?></td>
-                <td> <button class="btn btn-success"><a href="updateUsers.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Approve</a> </button> </td>
+                <td><?php echo $product_data['approve']; ?></td>
+
+                <td> <button class="btn btn-success"><a href="approve.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Approve</a> </button> </td>
            
-                <td> <button class="btn btn-danger"><a href="deleteUsers.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Decline</a> </button></td>
+                <td> <button class="btn btn-danger"><a href="decline.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Decline</a> </button></td>
               </tr>
               
-           <?php  } ?>
+           <?php  }} else{ ?>
+            <?php foreach ($products_data as $product_data) { ?>
+
+           <tr>
+           <td><?php echo $product_data['id']; ?></td>
+           <td><?php echo $product_data['client']; ?></td>
+           <td><?php echo $product_data['email']; ?></td>
+           <td><?php echo $product_data['address']; ?></td>
+           <td><?php echo $product_data['productname']; ?></td>
+           <td><?php echo $product_data['price']; ?></td>
+           <td><?php echo $product_data['approve']; ?></td>
+
+          </tr>
            
             
           </tbody>
         </table>
       </div>
-     <?php  } else {
-        
-
-    } ?>
+     <?php  }} ?>
     </main>
   </div>
 </div>

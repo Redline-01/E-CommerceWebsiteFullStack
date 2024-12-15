@@ -14,6 +14,8 @@
     
     $user_data = $selectUser->fetch();
 
+    
+
 ?>
 
 
@@ -90,7 +92,7 @@
        
           
         </ul>
-        <?php }else {?>
+        <?php }else  {?>
           <li class="nav-item">
               <a class="nav-link" href="project.php">
                
@@ -98,9 +100,15 @@
               </a>
             </li>
           <li class="nav-item">
-          <a class="nav-link" href="editUsers.php">
+          <a class="nav-link" href="updateUsers.php">
             <span></span>
             Edit Profile
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="ordersList.php">
+            <span data-feather="home"></span>
+            Your Orders
           </a>
         </li>
         </ul>
@@ -123,6 +131,7 @@
       <h2>Edit user's details</h2>
       <div class="table-responsive">
         
+      <?php  if ($_SESSION['isadmin'] == 'true') {?>
         <form action="editUsers.php" method="POST">
     
         <div class="form-floating">
@@ -148,6 +157,44 @@
         <br>
         <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Change</button>
       </form>
+      <?php } else{
+        $user_data = [
+          'id' => $_SESSION['id'],
+          'name' => $_SESSION['name'],
+          'surname' => $_SESSION['surname'],
+          'username' => $_SESSION['username'],
+          'email' => $_SESSION['email']
+      ]; ?>
+        <form action="editUsers.php" method="POST">
+    
+        <div class="form-floating">
+          <input type="number" class="form-control" id="floatingInput" placeholder="ID" name="id" value="<?php echo  $user_data['id'] ?>">
+          <label for="floatingInput">ID</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="name" value="<?php echo  $user_data['name'] ?>">
+          <label for="floatingInput">Name</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Surname" name="surname" value="<?php echo  $user_data['surname'] ?>">
+          <label for="floatingInput">Surname</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" value="<?php echo  $user_data['username'] ?>">
+          <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating">
+          <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" value="<?php echo  $user_data['email'] ?>">
+          <label for="floatingInput">Email</label>
+        </div>
+        <br>
+        <button class="w-100 btn btn-lg btn-primary" type="submit" name="submit">Change</button>
+      </form>
+
+
+
+
+        <?php } ?>
 
 
       </div>

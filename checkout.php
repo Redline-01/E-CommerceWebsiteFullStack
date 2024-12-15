@@ -307,15 +307,11 @@ $totalPrice = array_sum(array_column($cartItems, 'price'));
             <form class="needs-validation" novalidate="" action="checkoutInfo.php" method="POST">
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="firstName">First name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
-                        <div class="invalid-feedback"> Valid first name is required. </div>
+                        <label for="firstName">Full name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="" name="client">
+                        <div class="invalid-feedback"> Valid full name is required. </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="lastName">Last name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-                        <div class="invalid-feedback"> Valid last name is required. </div>
-                    </div>
+                   
                 </div>
                 <div class="mb-3">
                     <label for="username">Username</label>
@@ -329,30 +325,30 @@ $totalPrice = array_sum(array_column($cartItems, 'price'));
                 </div>
                 <div class="mb-3">
                     <label for="email">Email <span class="text-muted">(Optional)</span></label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                    <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email">
                     <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
                 </div>
                 <div class="mb-3">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="" name="address">
                     <div class="invalid-feedback"> Please enter your shipping address. </div>
                 </div>
                 <div class="mb-3">
                     <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite" name="address2">
                 </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="country">Country</label>
-                        <select class="custom-select d-block w-100" id="country" required="">
+                        <select class="custom-select d-block w-100" id="country" required="" name="country">
                             <option value="">Choose...</option>
                             <option>Kosova</option>
                         </select>
                         <div class="invalid-feedback"> Please select a valid country. </div>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="state">State</label>
-                        <select class="custom-select d-block w-100" id="state" required="">
+                        <label for="state">City</label>
+                        <select class="custom-select d-block w-100" id="state" required="" name="city">
                             <option value="">Choose...</option>
                             <option>Prishtina</option>
 							<option>Gjilan</option>

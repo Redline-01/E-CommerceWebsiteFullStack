@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2024 at 05:44 PM
+-- Generation Time: Dec 15, 2024 at 09:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -69,7 +69,8 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`id`, `name`, `surname`, `username`, `email`, `password`, `confirmpassword`, `isadmin`) VALUES
 (1, 'Redon', 'Bytyqi', 'redline', 'redon@gmail.com', '$2y$10$rWrL3/25Aq3r4gHmpWL0eOX844q0iyuSju7o65RT1D7f6XCozIPKC', '$2y$10$S3WNz/VkBTDnC1GXAcvj5eXzzc.SumhhKJkYoxqi9xW56JyuLhBkS', ''),
 (2, 'redon', 'bytyqi', 'redline1', 'redon@gmail.com', '$2y$10$Voso.8LRGmEkhsNNkXRKc.a1sk5MxonXEy81Dbi2oJDUFcHNju5BS', '$2y$10$QLerN8n9dXKsC0MkDvtKN.KlDu1WfewbV9CCriia6MnyOJfwaTBMG', 'true'),
-(3, 'Besart', 'Ibishi', 'besartibishi', 'besart@gmail.com', '$2y$10$WhNJ4pN4RMS4YvffmzRiW.12lN8lIJuURPSSHDqfb07O7.Qzvnj6O', '$2y$10$V0MKo.QIkcH4XsN3RsdB.OdCP3ru.dSb1o.tlin8r7CALZ.BHZB8q', '');
+(3, 'Besart', 'Ibishi', 'besartibishi', 'besart@gmail.com', '$2y$10$WhNJ4pN4RMS4YvffmzRiW.12lN8lIJuURPSSHDqfb07O7.Qzvnj6O', '$2y$10$V0MKo.QIkcH4XsN3RsdB.OdCP3ru.dSb1o.tlin8r7CALZ.BHZB8q', ''),
+(4, 'Redon', 'b', 'red', 'redon@gmail.com', '$2y$10$BtKASIzzH7VC7Mqfg0Q/YuiFaDzadl6LA4OTT5Hwb1YCJZs3a/FV6', '$2y$10$8er2khykQmGjvuSM7MXInuS.RUNTiH8N.ML/60NcBux8DpkSshzne', '');
 
 -- --------------------------------------------------------
 
@@ -79,11 +80,23 @@ INSERT INTO `login` (`id`, `name`, `surname`, `username`, `email`, `password`, `
 
 CREATE TABLE `orders` (
   `id` int(255) NOT NULL,
+  `userid` int(10) NOT NULL,
+  `order_id` int(10) NOT NULL,
   `client` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `address` varchar(555) NOT NULL,
   `productname` varchar(255) NOT NULL,
-  `price` varchar(255) NOT NULL,
+  `price` float NOT NULL,
   `approve` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `userid`, `order_id`, `client`, `email`, `address`, `productname`, `price`, `approve`) VALUES
+(2, 0, 0, 'redon', 'redon@gmail.com', 'Rr.Kelmendi Hajvali Prishtine', '', 0, 'false'),
+(3, 0, 0, 'Redon Bytyqi', 'redon@gmail.com', 'dawawdad', '', 0, 'true');
 
 -- --------------------------------------------------------
 
@@ -160,13 +173,13 @@ ALTER TABLE `clientmessages`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `shopproducts`

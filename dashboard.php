@@ -87,7 +87,9 @@
        
           
         </ul>
-        <?php }else {?>
+        <?php }else  { 
+        
+          ?>
           <li class="nav-item">
               <a class="nav-link" href="project.php">
                
@@ -95,14 +97,21 @@
               </a>
             </li>
           <li class="nav-item">
-          <a class="nav-link" href="editUsers.php">
-            <span ></span>
+          <a class="nav-link" href="updateUsers.php">
+            <span data-feather="home"></span>
             Edit Profile
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="ordersList.php">
+            <span data-feather="home"></span>
+            Your Orders
+          </a>
+        </li>
         </ul>
-      <?php
-      } ?>
+       
+      <?php 
+    } ?>
 
         
       </div>
