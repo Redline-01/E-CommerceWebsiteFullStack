@@ -24,14 +24,11 @@ let cart = [];
 
 
 function addToCart(productName, productPrice) {
-
     let existingProduct = cart.find(item => item.name === productName);
 
     if (existingProduct) {
-    
         existingProduct.quantity++;
     } else {
-        
         cart.push({
             name: productName,
             price: parseFloat(productPrice),
@@ -39,10 +36,18 @@ function addToCart(productName, productPrice) {
         });
     }
 
+    fetch('add_to_cart.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `name=${encodeURIComponent(productName)}&price=${encodeURIComponent(productPrice)}`,
+    })
    
+    
     updateCart();
     updateNotificationDot();
-};
+}
 
 
 function updateCart() {

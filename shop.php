@@ -226,13 +226,19 @@
 .removebtn{
 	background-color: #f8f9fa;
 	color: red;
-	border: none;
+	border: 1px solid #f8f9fa;
 	padding: 5px 10px;
 	cursor: pointer;
-	border-radius: 5px;
+	border-radius: 50px;
 	font-size: 16px;
 	margin-left: 10px;
 	font-weight: bold;	
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.removebtn:hover{
+	background-color: red;
+	color: white;
+	border: 1px solid red;
 }
 
 	</style>
