@@ -30,4 +30,21 @@
 //      }
 //  };
 
+function openFavoriteModal(productName) {
+    document.getElementById("favoriteTitle").textContent = 'Your product has been added to favourites successfully!'
+    document.getElementById("favoriteMessage").textContent = `"${productName}" has been added to favorites!`;
+  
+    document.getElementById("favoriteModal").style.display = "block";
+  }
+
+  document.querySelector(".close").onclick = function() {
+    document.getElementById("favoriteModal").style.display = "none";
+  }
+  
+  window.onclick = function(event) {
+    if (event.target === document.getElementById("favoriteModal")) {
+      document.getElementById("favoriteModal").style.display = "none";
+    }
+  }
+
  

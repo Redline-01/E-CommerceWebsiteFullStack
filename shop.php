@@ -88,7 +88,7 @@
 }
 #cartbutton {
 	position: fixed;
-	top: 190px;
+	top: 145px;
 	right: 15px;
     cursor: pointer;
     z-index: 1;
@@ -326,13 +326,21 @@
             <img class="img-shop" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAe1JREFUWEftlz0yhEEQhp+twikESEgkLoBE6gokZE5AoTiBjARHkEpwAYmExE+VU6CKfdV8W1OzO9Mzsz+1wXYimJ7uZ/vt6f60GDNrjRkPEyBLkbBCh8GFa+DdCjLI8xDot0fwI+B4kElTsXKAdH8buBoFVEqyubZcWw7iHljPAFoDVp3fA6B7RZZ6ZQK6a1dGf2XzGf2kHpTEsiqprWd/6VUpJ8HQgSSBqtSYVaWhAwnkzZPNau6RAPlJwubuNSZKXnWXr9VDzQW/Sr5stUDR15gL5De35pGkk9UC+fc0TjrjIRcot7lzesj30VpSxTuWCxQ2d2wE5AAlR0kJkKa2gsn0y1TqcPFaQBqy6sfGuvKXAOWMAAsoKZcSlAKlRoDiWbvMnGmlQDX7rZHHl6urmaMapqaaOyvdb01IS85/v9IKNbL4+63Z7tZv8f2iO7EGKGxuCyQ8j8pVWyHd88tfCpT8jKmtUPiicqE+rE/hfoByIYr8+gE6d0v2FdgDbiOZN4AzYMFN+t0UYS2Qv0YU/wVYiiR6Bha9s+RHXi3QPnDiJfkGZiJAX8C0d3YAnMaqVAu0DDy2A0+5wBdATApJu+P8foAV4GnQQIonqE3g03o57j+XWeAmBdPPHCp6OSXOtZKV5CjynQBZ5foDkI1sJb53g8kAAAAASUVORK5CYII="/> Add to Cart
         </button>
 		<h3 class="price">&euro; <?php echo number_format($price, 2); ?></h3>
-			<div><img src="images/heart.png" width="40px" height="40px" class="heart-icon"></div>
+			<div class="heart-icon"><img src="images/heart.png" width="40px" height="40px" class="heart-img"  onclick="openFavoriteModal('<?php echo addslashes($product_data['nameProducts']); ?>')"></div>
 		   </div>
         
         </div>
 
 
 		<?php } ?>
+
+		<div id="favoriteModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+	<h3 id="favoriteTitle"></h3>
+    <p id="favoriteMessage"></p>
+  </div>
+</div>
 
 		<!-- <div class="buyShop" name="buyProduct">
 
