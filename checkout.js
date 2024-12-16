@@ -17,4 +17,6 @@
     }, false)
   }());
 
-  
+  function finishOrder() {
+    alert("Order has finished successfully");
+}

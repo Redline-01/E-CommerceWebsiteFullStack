@@ -445,7 +445,7 @@ $totalPrice = array_sum(array_column($cartItems, 'price'));
                     </div>
                 </div>
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Finish Order</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="finishOrder()">Finish Order</button>
             </form>
         </div>
     </div>
