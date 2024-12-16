@@ -276,7 +276,7 @@ $totalPrice = array_sum(array_column($cartItems, 'price'));
         <div class="col-md-4 order-md-2 mb-4">
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Your cart</span>
-        <span class="badge badge-secondary badge-pill"><?= count($cartItems) ?></span>
+        <span class="badge badge-secondary badge-pill" style="color: black;"><?= count($cartItems) ?></span>
     </h4>
     <ul class="list-group mb-3 sticky-top">
         <?php foreach ($cartItems as $item): ?>
@@ -290,7 +290,7 @@ $totalPrice = array_sum(array_column($cartItems, 'price'));
         <?php endforeach; ?>
         <li class="list-group-item d-flex justify-content-between">
             <span>Total (EUR)</span>
-            <strong>€<?= number_format($totalPrice, 2) ?></strong>
+            <strong name="price">€<?= number_format($totalPrice, 2) ?></strong>
         </li>
     </ul>
             <form class="card p-2">
@@ -445,7 +445,7 @@ $totalPrice = array_sum(array_column($cartItems, 'price'));
                     </div>
                 </div>
                 <hr class="mb-4">
-                <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="finishOrder()">Finish Order</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Finish Order</button>
             </form>
         </div>
     </div>
