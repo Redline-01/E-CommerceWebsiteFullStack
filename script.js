@@ -1,11 +1,16 @@
-document.addEventListener("scroll" , 
-function() {
-    const scrollingFigure = 
-    document.getElementById("scrollingFigure");
-    const scrollY = window.scrollY;
+const scrollToTopButton = document.getElementById("scrollToTop");
 
+window.onscroll = function () {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        scrollToTopButton.classList.add("show"); 
+    } else {
+        scrollToTopButton.classList.remove("show");
+    }
+};
 
-    scrollingFigure.style.transform = 
-    'translate(-50%, calc(-50% + ${scrollY * 0.5}px))';
-
+scrollToTopButton.addEventListener("click", function () {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    });
 });

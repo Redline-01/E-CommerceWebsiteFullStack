@@ -46,5 +46,4 @@ function openFavoriteModal(productName) {
       document.getElementById("favoriteModal").style.display = "none";
     }
   }
-
- 
+  
