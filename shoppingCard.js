@@ -94,6 +94,7 @@ function deleteItem(event, index) {
 
     updateCart();
     updateNotificationDot();
+  
 }
 
 
