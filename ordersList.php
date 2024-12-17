@@ -6,12 +6,22 @@
           header("Location: login.php");
     }
    
-    $sql = "SELECT * FROM orders";
-    $selectProducts = $conn->prepare($sql);
-    $selectProducts->execute();
-
-    $products_data = $selectProducts->fetchAll();
-
+    if ($_SESSION['isadmin'] == 'true') {
+      $sql = "SELECT orders.*, login.username FROM orders INNER JOIN login ON orders.userid = login.id";
+  } else {
+      $userid = $_SESSION['id'];
+      $sql = "SELECT orders.*, login.username FROM orders INNER JOIN login ON orders.userid = login.id WHERE orders.userid = :userid";
+  }
+  
+  $selectProducts = $conn->prepare($sql);
+  
+  if ($_SESSION['isadmin'] != 'true') {
+      $selectProducts->bindParam(":userid", $userid);
+  }
+  
+  $selectProducts->execute();
+  $products_data = $selectProducts->fetchAll();
+  
     
     
 
