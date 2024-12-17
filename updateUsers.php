@@ -1,8 +1,8 @@
 <?php
 
     include_once("config.php");
-
-    $id = $_GET['id'];
+  
+    $id = isset($_GET['id']) ? $_GET['id'] : $_SESSION['id'];
 
     $sql = "SELECT * FROM login WHERE id=:id";
 
@@ -210,4 +210,4 @@
 
 
  </body>
- </html>
+ </html>  
