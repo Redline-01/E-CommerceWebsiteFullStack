@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 17, 2024 at 05:48 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Host: localhost
+-- Generation Time: Jan 02, 2025 at 03:58 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -79,7 +79,7 @@ INSERT INTO `login` (`id`, `name`, `surname`, `username`, `email`, `password`, `
 --
 
 CREATE TABLE `orders` (
-  `id` int(255) NOT NULL,
+  `id` int(10) NOT NULL,
   `userid` int(10) NOT NULL,
   `order_id` int(10) NOT NULL,
   `client` varchar(255) NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `userid`, `order_id`, `client`, `email`, `address`, `productname`, `price`, `approve`) VALUES
-(9, 4, 0, 'Redon Bytyqi', 'redon@gmail.com', 'Test', '', 0, '');
+(1, 4, 1, 'Redon Bytyqi', 'redon@gmail.com', 'Test', '', 0, 'true');
 
 -- --------------------------------------------------------
 
@@ -107,8 +107,6 @@ CREATE TABLE `shopproducts` (
   `id` int(50) NOT NULL,
   `nameProducts` varchar(255) NOT NULL,
   `price` float NOT NULL,
-  `addToCart` varchar(255) NOT NULL,
-  `addFavorite` varchar(255) NOT NULL,
   `imageProducts` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -116,19 +114,19 @@ CREATE TABLE `shopproducts` (
 -- Dumping data for table `shopproducts`
 --
 
-INSERT INTO `shopproducts` (`id`, `nameProducts`, `price`, `addToCart`, `addFavorite`, `imageProducts`) VALUES
-(6, 'HyperX Cloud Red II Headset', 99.99, '', '', 'hyperxcloud2red.webp'),
-(7, 'HyperX Xbox Controller', 69.99, '', '', 'hyperxcontroller.webp'),
-(8, 'HyperX Cloud II Headset', 99.99, '', '', 'hyperxheadsetnew.webp'),
-(9, 'HyperX Keyboard', 149.99, '', '', 'hyperxkeyboard.webp'),
-(10, 'HyperX Gaming Mic', 129.99, '', '', 'hyperxmic.webp'),
-(11, 'HyperX Gaming Monitor', 259.99, '', '', 'hyperxmonitor.webp'),
-(12, 'HyperX Black Mouse', 69.99, '', '', 'hyperxmouse.webp'),
-(13, 'HyperX Keyboard Yellow', 159.99, '', '', 'hyperxnewkeyboard.webp'),
-(14, 'HyperX Red Mouse', 59.99, '', '', 'hyperxnewmouse.webp'),
-(15, 'HyperX Cloud Silver II Headset', 99.99, '', '', 'hyperxcloud2.webp'),
-(16, 'Cloud MIX Buds 2', 89.99, '', '', 'hyperxear.webp'),
-(17, 'OMEN 35L Gaming PC', 1599.99, '', '', 'omenpc.webp');
+INSERT INTO `shopproducts` (`id`, `nameProducts`, `price`, `imageProducts`) VALUES
+(6, 'HyperX Cloud Red II Headset', 99.99, 'hyperxcloud2red.webp'),
+(7, 'HyperX Xbox Controller', 69.99, 'hyperxcontroller.webp'),
+(8, 'HyperX Cloud II Headset', 99.99, 'hyperxheadsetnew.webp'),
+(9, 'HyperX Keyboard', 149.99, 'hyperxkeyboard.webp'),
+(10, 'HyperX Gaming Mic', 129.99, 'hyperxmic.webp'),
+(11, 'HyperX Gaming Monitor', 259.99, 'hyperxmonitor.webp'),
+(12, 'HyperX Black Mouse', 69.99, 'hyperxmouse.webp'),
+(13, 'HyperX Keyboard Yellow', 159.99, 'hyperxnewkeyboard.webp'),
+(14, 'HyperX Red Mouse', 59.99, 'hyperxnewmouse.webp'),
+(15, 'HyperX Cloud Silver II Headset', 99.99, 'hyperxcloud2.webp'),
+(16, 'Cloud MIX Buds 2', 89.99, 'hyperxear.webp'),
+(17, 'OMEN 35L Gaming PC', 1599.99, 'omenpc.webp');
 
 --
 -- Indexes for dumped tables
@@ -150,7 +148,8 @@ ALTER TABLE `login`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `order_id` (`order_id`);
 
 --
 -- Indexes for table `shopproducts`
@@ -178,7 +177,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `shopproducts`
