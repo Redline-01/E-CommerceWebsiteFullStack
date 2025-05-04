@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 02, 2025 at 03:58 PM
+-- Generation Time: May 04, 2025 at 09:56 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -69,8 +69,7 @@ CREATE TABLE `login` (
 INSERT INTO `login` (`id`, `name`, `surname`, `username`, `email`, `password`, `confirmpassword`, `isadmin`) VALUES
 (1, 'Redon', 'Bytyqi', 'redline', 'redon@gmail.com', '$2y$10$rWrL3/25Aq3r4gHmpWL0eOX844q0iyuSju7o65RT1D7f6XCozIPKC', '$2y$10$S3WNz/VkBTDnC1GXAcvj5eXzzc.SumhhKJkYoxqi9xW56JyuLhBkS', ''),
 (2, 'redon', 'bytyqi', 'redline1', 'redon@gmail.com', '$2y$10$Voso.8LRGmEkhsNNkXRKc.a1sk5MxonXEy81Dbi2oJDUFcHNju5BS', '$2y$10$QLerN8n9dXKsC0MkDvtKN.KlDu1WfewbV9CCriia6MnyOJfwaTBMG', 'true'),
-(3, 'Besart', 'Ibishi', 'besartibishi', 'besart@gmail.com', '$2y$10$WhNJ4pN4RMS4YvffmzRiW.12lN8lIJuURPSSHDqfb07O7.Qzvnj6O', '$2y$10$V0MKo.QIkcH4XsN3RsdB.OdCP3ru.dSb1o.tlin8r7CALZ.BHZB8q', ''),
-(4, 'Redon', 'b', 'red1', 'redon@gmail.com', '$2y$10$BtKASIzzH7VC7Mqfg0Q/YuiFaDzadl6LA4OTT5Hwb1YCJZs3a/FV6', '$2y$10$8er2khykQmGjvuSM7MXInuS.RUNTiH8N.ML/60NcBux8DpkSshzne', '');
+(4, 'Redon', 'bytyqi', 'red1', 'redon@gmail.com', '$2y$10$BtKASIzzH7VC7Mqfg0Q/YuiFaDzadl6LA4OTT5Hwb1YCJZs3a/FV6', '$2y$10$8er2khykQmGjvuSM7MXInuS.RUNTiH8N.ML/60NcBux8DpkSshzne', '');
 
 -- --------------------------------------------------------
 
@@ -81,7 +80,6 @@ INSERT INTO `login` (`id`, `name`, `surname`, `username`, `email`, `password`, `
 CREATE TABLE `orders` (
   `id` int(10) NOT NULL,
   `userid` int(10) NOT NULL,
-  `order_id` int(10) NOT NULL,
   `client` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `address` varchar(555) NOT NULL,
@@ -90,12 +88,19 @@ CREATE TABLE `orders` (
   `approve` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `orders`
+-- Table structure for table `order_items`
 --
 
-INSERT INTO `orders` (`id`, `userid`, `order_id`, `client`, `email`, `address`, `productname`, `price`, `approve`) VALUES
-(1, 4, 1, 'Redon Bytyqi', 'redon@gmail.com', 'Test', '', 0, 'true');
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `productname` varchar(255) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -126,7 +131,7 @@ INSERT INTO `shopproducts` (`id`, `nameProducts`, `price`, `imageProducts`) VALU
 (14, 'HyperX Red Mouse', 59.99, 'hyperxnewmouse.webp'),
 (15, 'HyperX Cloud Silver II Headset', 99.99, 'hyperxcloud2.webp'),
 (16, 'Cloud MIX Buds 2', 89.99, 'hyperxear.webp'),
-(17, 'OMEN 35L Gaming PC', 1599.99, 'omenpc.webp');
+(17, 'OMEN 35L Gaming PC', 1699.99, 'omenpc.webp');
 
 --
 -- Indexes for dumped tables
@@ -148,8 +153,14 @@ ALTER TABLE `login`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `order_id` (`order_id`);
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- Indexes for table `shopproducts`
@@ -165,7 +176,7 @@ ALTER TABLE `shopproducts`
 -- AUTO_INCREMENT for table `clientmessages`
 --
 ALTER TABLE `clientmessages`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `login`
@@ -180,10 +191,26 @@ ALTER TABLE `orders`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `shopproducts`
 --
 ALTER TABLE `shopproducts`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
