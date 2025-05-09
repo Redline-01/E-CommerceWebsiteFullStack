@@ -1,31 +1,29 @@
 <?php 
+include_once('config.php');
 
-   include_once('config.php');
+if (empty($_SESSION['username'])) {
+    header("Location: login.php");
+}
 
-    if (empty($_SESSION['username'])) {
-          header("Location: login.php");
+// Initialize empty cart array for PHP fallback
+$cartItems = [];
+$totalPrice = 0;
+?>
+
+<script>
+// Pass the current cart from localStorage to PHP
+const cartFromStorage = JSON.parse(localStorage.getItem('cart')) || [];
+document.cookie = "cartData=" + JSON.stringify(cartFromStorage) + "; path=/";
+</script>
+
+<?php
+// Now check for the cookie data
+if(isset($_COOKIE['cartData'])) {
+    $cartItems = json_decode($_COOKIE['cartData'], true);
+    foreach ($cartItems as $item) {
+        $totalPrice += $item['price'] * $item['quantity'];
     }
-   
-    $sql = "SELECT * FROM login";
-    $selectUsers = $conn->prepare($sql);
-    $selectUsers->execute();
-
-    $users_data = $selectUsers->fetchAll();
-
-	
-
-	$cartItems = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-
-   $totalPrice = 0;
-   foreach ($cartItems as $item) {
-    $totalPrice += $item['price'];
-    
-   }
-   $cartItems = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
-
-$totalPrice = array_sum(array_column($cartItems, 'price'));
-
-
+}
 ?>
  
  <!DOCTYPE html>
@@ -275,24 +273,24 @@ $totalPrice = array_sum(array_column($cartItems, 'price'));
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
 		<h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-muted">Your cart</span>
-        <span class="badge badge-secondary badge-pill" style="color: black;"><?= count($cartItems) ?></span>
-    </h4>
-    <ul class="list-group mb-3 sticky-top">
-        <?php foreach ($cartItems as $item): ?>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-                <div>
-                    <h6 class="my-0"><?= htmlspecialchars($item['name']) ?></h6>
-                </div>
-                <span class="text-muted">€<?= number_format($item['price'], 2) ?></span>
-				
-            </li>
-        <?php endforeach; ?>
-        <li class="list-group-item d-flex justify-content-between">
-            <span>Total (EUR)</span>
-            <strong name="price">€<?= number_format($totalPrice, 2) ?></strong>
+    <span class="text-muted">Your cart</span>
+    <span class="badge badge-secondary badge-pill" style="color: black;" id="cartCount"><?= count($cartItems) ?></span>
+</h4>
+<ul class="list-group mb-3 sticky-top" id="cartList">
+    <?php foreach ($cartItems as $item): ?>
+        <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+                <h6 class="my-0"><?= htmlspecialchars($item['name']) ?></h6>
+                <small class="text-muted">Quantity: <?= $item['quantity'] ?></small>
+            </div>
+            <span class="text-muted">€<?= number_format($item['price'] * $item['quantity'], 2) ?></span>
         </li>
-    </ul>
+    <?php endforeach; ?>
+    <li class="list-group-item d-flex justify-content-between">
+        <span>Total (EUR)</span>
+        <strong name="price">€<?= number_format($totalPrice, 2) ?></strong>
+    </li>
+</ul>
             <form class="card p-2">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Promo code">
@@ -444,6 +442,12 @@ $totalPrice = array_sum(array_column($cartItems, 'price'));
                         <div class="invalid-feedback"> Security code required </div>
                     </div>
                 </div>
+                <input type="hidden" name="cart_data" id="cartDataInput">
+<script>
+    document.querySelector('form').addEventListener('submit', function() {
+        document.getElementById('cartDataInput').value = localStorage.getItem('cart');
+    });
+</script>
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Finish Order</button>
             </form>
@@ -519,6 +523,64 @@ $totalPrice = array_sum(array_column($cartItems, 'price'));
 	</div>
   </div>
 </form>
+
+
+
+
+<script>
+// Real-time cart update function
+function updateCheckoutCart() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartList = document.getElementById('cartList');
+    const cartCount = document.getElementById('cartCount');
+    const totalElement = document.querySelector('.list-group-item strong');
+    
+    // Update count
+    const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+    cartCount.textContent = itemCount;
+    
+    // Update list
+    cartList.innerHTML = '';
+    let totalPrice = 0;
+    
+    if (cart.length === 0) {
+        cartList.innerHTML = '<li class="list-group-item">Your cart is empty</li>';
+    } else {
+        cart.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            totalPrice += itemTotal;
+            
+            cartList.innerHTML += `
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">${item.name}</h6>
+                        <small class="text-muted">Quantity: ${item.quantity}</small>
+                    </div>
+                    <span class="text-muted">€${itemTotal.toFixed(2)}</span>
+                </li>
+            `;
+        });
+    }
+    
+    // Update total
+    totalElement.textContent = `€${totalPrice.toFixed(2)}`;
+    
+    // Update hidden form field for submission
+    document.querySelector('input[name="cart_data"]').value = JSON.stringify(cart);
+}
+
+// Run on page load and set up event listener
+document.addEventListener('DOMContentLoaded', function() {
+    updateCheckoutCart();
+    
+    // Listen for storage events (changes from other tabs/windows)
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'cart') {
+            updateCheckoutCart();
+        }
+    });
+});
+</script>
 
 </body>
 

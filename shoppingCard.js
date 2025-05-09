@@ -1,3 +1,15 @@
+let cart = []; 
+
+
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+if (localStorage.getItem('cart')) {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    updateCart();
+}
+
 function toggleCart() {
     const cart = document.getElementById('shoppingCart');
     const overlay = document.getElementById('overlay');
@@ -20,7 +32,6 @@ function updateTotal() {
     document.getElementById('cartTotal').textContent = `Total: $${total.toFixed(2)}`;
 };
 
-let cart = []; 
 
 
 function addToCart(productName, productPrice) {
@@ -44,7 +55,7 @@ function addToCart(productName, productPrice) {
         body: `name=${encodeURIComponent(productName)}&price=${encodeURIComponent(productPrice)}`,
     })
    
-    
+    saveCart();
     updateCart();
     updateNotificationDot();
 }
@@ -92,6 +103,7 @@ function deleteItem(event, index) {
     event.stopPropagation();
     cart.splice(index, 1);
 
+    saveCart();
     updateCart();
     updateNotificationDot();
   
@@ -112,6 +124,8 @@ function updateQuantity(event) {
         updateCart();
         updateNotificationDot();
     }
+
+    saveCart();
 };
 
 function updateNotificationDot() {
@@ -140,6 +154,8 @@ document.addEventListener('click', function(event) {
         overlay.classList.remove('active');
     }
 });
+
+
 
 // const myDiv = document.getElementById('cartbutton');
 //   const divOffsetTop = myDiv.offsetTop; 

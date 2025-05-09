@@ -1,30 +1,59 @@
-<?php 
+<?php
+include_once('config.php');
+session_start();
 
+// Validate session and input
+if (empty($_SESSION['id'])) {
+    header("Location: login.php");
+    exit();
+}
 
-	include_once('config.php');
+if (empty($_POST['client']) || empty($_POST['email']) || empty($_POST['address'])) {
+    die("Error: Required fields are missing.");
+}
 
-	$id = $_SESSION['id'];
+// Get cart data from localStorage via hidden form field
+$cartData = json_decode($_POST['cart_data'], true);
+if (json_last_error() !== JSON_ERROR_NONE || !is_array($cartData)) {
+    die("Error: Invalid cart data.");
+}
+
+try {
+    $conn->beginTransaction();
+
+    // Calculate total price
+    $total = 0;
+    $productNames = [];
+    foreach ($cartData as $item) {
+        $total += $item['price'] * $item['quantity'];
+        $productNames[] = $item['name'];
+    }
+
+    // Insert into orders table
+    $stmt = $conn->prepare("
+        INSERT INTO orders (userid, client, email, address, productname, price, approve) 
+        VALUES (:userid, :client, :email, :address, :productname, :price, 'false')
+    ");
     
-    $userid = $_SESSION['id'];
-    $client = $_POST['client'];
-	$email = $_POST['email'];
-	$address = $_POST['address'];
-	// $productname = $_POST['productname'];
-	// $price = $_POST['price'];
+    $stmt->execute([
+        ':userid' => $_SESSION['id'],
+        ':client' => $_POST['client'],
+        ':email' => $_POST['email'],
+        ':address' => $_POST['address'],
+        ':productname' => implode(', ', $productNames), // Combine product names
+        ':price' => $total
+    ]);
 
-	$sql = "INSERT INTO orders(userid, client, email, address) VALUES (:userid, :client, :email, :address)";
+    $conn->commit();
 
-	$insertCheckout = $conn->prepare($sql);
+    // Clear the cart
+    echo "<script>
+        localStorage.removeItem('cart');
+        window.location.href = 'ordersList.php';
+    </script>";
+    exit();
 
-	$insertCheckout->bindParam(":userid", $userid);
-	$insertCheckout->bindParam(":client", $client);
-	$insertCheckout->bindParam(":email", $email);
-	$insertCheckout->bindParam(":address", $address);
-	// $insertCheckout->bindParam(":productname", $productname);
-	// $insertCheckout->bindParam(":price", $price);
-
-	$insertCheckout->execute();
-
-	header("Location: ordersList.php");
-
- ?>
+} catch (PDOException $e) {
+    $conn->rollBack();
+    die("Error processing order: " . $e->getMessage());
+}
