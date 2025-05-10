@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 04, 2025 at 09:56 PM
+-- Generation Time: May 10, 2025 at 07:40 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -87,6 +87,13 @@ CREATE TABLE `orders` (
   `price` float NOT NULL,
   `approve` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `userid`, `client`, `email`, `address`, `productname`, `price`, `approve`) VALUES
+(4, 2, 'Test Test', 'redon@gmail.com', 'Prishtine Hajvali Nr.7', 'HyperX Xbox Controller (Qty: 2), HyperX Cloud II Headset (Qty: 1)', 239.97, 'E Aprovuar');
 
 -- --------------------------------------------------------
 
@@ -188,7 +195,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_items`
