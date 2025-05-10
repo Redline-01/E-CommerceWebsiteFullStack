@@ -8,6 +8,7 @@ function saveCart() {
 if (localStorage.getItem('cart')) {
     cart = JSON.parse(localStorage.getItem('cart'));
     updateCart();
+    updateNotificationDot();
 }
 
 function toggleCart() {

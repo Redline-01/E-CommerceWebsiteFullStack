@@ -58,6 +58,8 @@
 				else{
 				
 					echo "The password is incorrect";
+					header("Refresh: 2; url=login.php");
+
 				}
 
 			}
