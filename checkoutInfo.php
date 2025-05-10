@@ -25,9 +25,10 @@ try {
     $total = 0;
     $productNames = [];
     foreach ($cartData as $item) {
-        $total += $item['price'] * $item['quantity'];
-        $productNames[] = $item['name'];
-    }
+    $productNames[] = $item['name'] . ' (Qty: ' . $item['quantity'] . ')';
+    $total += $item['price'] * $item['quantity'];
+}
+
 
     // Insert into orders table
     $stmt = $conn->prepare("

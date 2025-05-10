@@ -158,7 +158,9 @@
           <td><?php echo $product_data['client']; ?></td>
           <td><?php echo $product_data['email']; ?></td>
           <td><?php echo $product_data['address']; ?></td>
-          <td><?php echo $product_data['productname']; ?></td>
+          <td>
+                <?= nl2br(htmlspecialchars($product_data['productname'])) ?>
+          </td>
           <td><?php echo $product_data['price']; ?></td>
           <td><?php echo $product_data['approve']; ?></td>
           <?php if ($_SESSION['isadmin'] == 'true') { ?>
