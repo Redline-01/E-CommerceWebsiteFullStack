@@ -33,7 +33,7 @@ try {
     // Insert into orders table
     $stmt = $conn->prepare("
         INSERT INTO orders (userid, client, email, address, productname, price, approve) 
-        VALUES (:userid, :client, :email, :address, :productname, :price, 'false')
+        VALUES (:userid, :client, :email, :address, :productname, :price, 'Ne Procesim')
     ");
     
     $stmt->execute([
