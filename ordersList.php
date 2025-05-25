@@ -46,21 +46,100 @@
  </head>
  <body>
  
- 
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow" style="position:relative; min-height:65px;">
-   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="position:absolute; left:10px; top:50%; transform:translateY(-50%);">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"><?php echo "Welcome to Dashboard ".$_SESSION['username']; ?></a>
-  <img src="images/hyperx.png" alt="HyperX Logo" style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); height:60px; z-index:10;">
-  
-  
-  <div class="navbar-nav">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#" id="dashboardBrand" style="transition:margin-left 0.3s;"><?php echo "Welcome ".$_SESSION['username']; ?></a>
+  <img src="images/hyperx.png" alt="HyperX Logo" id="dashboardLogo" style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); height:60px; z-index:10; transition:left 0.3s, transform 0.3s;">
+  <div class="navbar-nav d-none d-md-flex" id="desktopSignOut">
     <div class="nav-item text-nowrap">
       <a class="nav-link px-3" href="logout.php">Sign out</a>
     </div>
   </div>
+  <!-- Dropdown menu for mobile -->
+  <ul class="dropdown-menu d-md-none" id="mobileNavDropdown" style="left:10px; top:60px;">
+    <?php if ($_SESSION['isadmin'] == 'true') { ?>
+      <li><a class="dropdown-item" href="project.php">Home</a></li>
+      <li><a class="dropdown-item" href="dashboard.php">Edit Users</a></li>
+      <li><a class="dropdown-item" href="ordersList.php">Orders</a></li>
+      <li><a class="dropdown-item" href="messagesDashboard.php">Client Messages</a></li>
+      <li><a class="dropdown-item" href="editProducts.php">Add/Edit Products</a></li>
+    <?php } else { ?>
+      <li><a class="dropdown-item" href="project.php">Home</a></li>
+      <li><a class="dropdown-item" href="updateUsers.php">Edit Profile</a></li>
+      <li><a class="dropdown-item" href="ordersList.php">Your Orders</a></li>
+    <?php } ?>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item text-danger" href="logout.php">Sign out</a></li>
+  </ul>
 </header>
+
+<style>
+@media (max-width: 767.98px) {
+  #dashboardBrand {
+    margin-left: 50px;
+    font-size: 1rem;
+    max-width: 60vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #dashboardLogo {
+    left: 55%;
+    height: 45px;
+  }
+}
+@media (max-width: 400px) {
+  #dashboardBrand {
+    font-size: 0.9rem;
+    margin-left: 40px;
+  }
+  #dashboardLogo {
+    left: 58%;
+    height: 35px;
+  }
+}
+</style>
+
+<script>
+// Show/hide dropdown on toggler click (mobile only)
+document.addEventListener('DOMContentLoaded', function() {
+  var toggler = document.querySelector('.navbar-toggler');
+  var dropdown = document.getElementById('mobileNavDropdown');
+  if (toggler && dropdown) {
+    toggler.addEventListener('click', function(e) {
+      e.stopPropagation();
+      dropdown.classList.toggle('show');
+    });
+    document.addEventListener('click', function(e) {
+      if (!toggler.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('show');
+      }
+    });
+  }
+});
+function adjustDashboardHeader() {
+  var brand = document.getElementById('dashboardBrand');
+  var logo = document.getElementById('dashboardLogo');
+  if (window.innerWidth < 768) {
+    brand.style.marginLeft = '50px';
+    logo.style.left = '55%';
+    logo.style.height = '45px';
+  } else {
+    brand.style.marginLeft = '';
+    logo.style.left = '50%';
+    logo.style.height = '60px';
+  }
+  if (window.innerWidth < 400) {
+    brand.style.marginLeft = '40px';
+    logo.style.left = '58%';
+    logo.style.height = '35px';
+  }
+}
+window.addEventListener('resize', adjustDashboardHeader);
+document.addEventListener('DOMContentLoaded', adjustDashboardHeader);
+</script>
 
 <div class="container-fluid">
   <div class="row">
