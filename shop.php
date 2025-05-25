@@ -350,18 +350,18 @@
         // Show pagination at the end of the page (after last product on this page)
         if ($productCount == count($products_data) && $totalPages > 1) {
             ?>
-            <div style="width:100%;text-align:center;margin:30px 0;">
-                <div style="display:inline-flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;">
+            <div style="width:100%; text-align:center; margin:30px 0;">
+                <div style="display:inline-flex; justify-content:center; align-items:center; gap:4px; flex-wrap:wrap;">
                 <?php if ($page > 1): ?>
-                    <a href="shop.php?page=<?= $page - 1 ?>" style="display:inline-block;padding:8px 16px;border-radius:4px;background:#f8f9fa;color:#333;text-decoration:none;font-weight:bold;">&laquo; Prev</a>
+                    <a href="shop.php?page=<?= $page - 1 ?>" style="display:inline-block; padding:8px 16px; border-radius:4px; background:#f8f9fa; color:#333; text-decoration:none; font-weight:bold;">&laquo; Prev</a>
                 <?php endif; ?>
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <a href="shop.php?page=<?= $i ?>" style="display:inline-block;padding:8px 16px;border-radius:4px;background:<?= $i == $page ? '#333030' : '#f8f9fa' ?>;color:<?= $i == $page ? 'white' : '#333' ?>;text-decoration:none;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,0.08);">
+                    <a href="shop.php?page=<?= $i ?>" style="display:inline-block; padding:8px 16px; border-radius:4px; background:<?= $i == $page ? '#333030' : '#f8f9fa' ?>; color:<?= $i == $page ? 'white' : '#333' ?>;text-decoration:none;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,0.08);">
                         <?= $i ?>
                     </a>
                 <?php endfor; ?>
                 <?php if ($page < $totalPages): ?>
-                    <a href="shop.php?page=<?= $page + 1 ?>" style="display:inline-block;padding:8px 16px;border-radius:4px;background:#f8f9fa;color:#333;text-decoration:none;font-weight:bold;">Next &raquo;</a>
+                    <a href="shop.php?page=<?= $page + 1 ?>" style="display:inline-block; padding:8px 16px; border-radius:4px; background:#f8f9fa; color:#333; text-decoration:none; font-weight:bold;">Next &raquo;</a>
                 <?php endif; ?>
                 </div>
             </div>
