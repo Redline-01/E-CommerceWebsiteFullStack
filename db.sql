@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 10, 2025 at 07:40 PM
+-- Generation Time: May 25, 2025 at 04:23 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -67,9 +67,9 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `name`, `surname`, `username`, `email`, `password`, `confirmpassword`, `isadmin`) VALUES
-(1, 'Redon', 'Bytyqi', 'redline', 'redon@gmail.com', '$2y$10$rWrL3/25Aq3r4gHmpWL0eOX844q0iyuSju7o65RT1D7f6XCozIPKC', '$2y$10$S3WNz/VkBTDnC1GXAcvj5eXzzc.SumhhKJkYoxqi9xW56JyuLhBkS', ''),
 (2, 'redon', 'bytyqi', 'redline1', 'redon@gmail.com', '$2y$10$Voso.8LRGmEkhsNNkXRKc.a1sk5MxonXEy81Dbi2oJDUFcHNju5BS', '$2y$10$QLerN8n9dXKsC0MkDvtKN.KlDu1WfewbV9CCriia6MnyOJfwaTBMG', 'true'),
-(4, 'Redon', 'bytyqi', 'red1', 'redon@gmail.com', '$2y$10$BtKASIzzH7VC7Mqfg0Q/YuiFaDzadl6LA4OTT5Hwb1YCJZs3a/FV6', '$2y$10$8er2khykQmGjvuSM7MXInuS.RUNTiH8N.ML/60NcBux8DpkSshzne', '');
+(6, 'Redon', 'Bytyqi', 'redonbytyqi', 'redon-bytyqi1231@outlook.com', '$2y$10$bWvmT.kVTu9M2EiN6Twn6e5t5mRTpUUEZBUnICsTx.OkNZl/ks8P.', '$2y$10$0wJRhHk7n7XOL/LBZnmjDOHzk0eYKf7dY/lUm.gfwtZhDVJ.V9buS', 'false'),
+(10, 'test', 'test', 'test', 'test@gmaol.com', '$2y$10$9Yh9..XZmASdhPjqr/ugxexyBx1qBqvZIkTZKReh5vow0psAeiJl2', '$2y$10$M2ZSFwJf8oxNntPp9OOFj.s4fIrAKkhkGcR.PB/bqEhu5MFfIlxui', 'false');
 
 -- --------------------------------------------------------
 
@@ -83,6 +83,9 @@ CREATE TABLE `orders` (
   `client` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `address` varchar(555) NOT NULL,
+  `country` varchar(100) NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `zip` varchar(20) NOT NULL,
   `productname` varchar(255) NOT NULL,
   `price` float NOT NULL,
   `approve` varchar(255) NOT NULL
@@ -92,8 +95,10 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `userid`, `client`, `email`, `address`, `productname`, `price`, `approve`) VALUES
-(4, 2, 'Test Test', 'redon@gmail.com', 'Prishtine Hajvali Nr.7', 'HyperX Xbox Controller (Qty: 2), HyperX Cloud II Headset (Qty: 1)', 239.97, 'E Aprovuar');
+INSERT INTO `orders` (`id`, `userid`, `client`, `email`, `address`, `country`, `city`, `zip`, `productname`, `price`, `approve`) VALUES
+(8, 2, 'redline1', 'redon@gmail.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'HyperX Xbox Controller (Qty: 2), HyperX Cloud Red II Headset (Qty: 1)', 239.97, 'Approved'),
+(9, 2, 'redline1', 'redon-bytyqi1231@outlook.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'HyperX Xbox Controller (Qty: 1)', 69.99, 'Approved'),
+(10, 2, 'redline1', 'redon-bytyqi1231@outlook.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'Cloud MIX Buds 2 (Qty: 1)', 89.99, 'Approved');
 
 -- --------------------------------------------------------
 
@@ -189,13 +194,13 @@ ALTER TABLE `clientmessages`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `order_items`
