@@ -118,6 +118,11 @@
      </style>
 </head>
 <body>
+    <!-- Toast Notification -->
+    <div id="toast" style="display:none;position:fixed;top:30px;right:30px;z-index:9999;min-width:220px;padding:16px 24px;background:#333;color:#fff;border-radius:8px;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,0.2);transition:opacity 0.3s;opacity:0;">
+      <span id="toast-message"></span>
+    </div>
+
     <section id="section-1">
 		<div class="header">
 			<header>
@@ -166,17 +171,17 @@
         <h3>Sign Up</h3>
         <class class="container">
        
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="text" name="surname" placeholder="Surname" required> 
-        <input type="text" placeholder="Username" id="username" name="username" required>
+        <input type="text" name="name" placeholder="Name">
+        <input type="text" name="surname" placeholder="Surname"> 
+        <input type="text" placeholder="Username" id="username" name="username">
         
 
         
-        <input type="email" placeholder="E-mail" id="email" name="email" required>
+        <input type="email" placeholder="E-mail" id="email" name="email">
         
         
-        <input type="password" placeholder="Password" id="password" name="password" required>
-        <input type="password" placeholder="Confirm Password" name="confirmpassword" required>
+        <input type="password" placeholder="Password" id="password" name="password">
+        <input type="password" placeholder="Confirm Password" name="confirmpassword">
         
         <input type="submit" value="Sign Up" name="submit"> 
         <span>Already have an account? | <a href="login.php">Login</a></span>
@@ -275,4 +280,42 @@
 
 <script src="main.js"></script>
 <script src="login.js"></script>
+<script>
+// Toast logic
+function showToast(message, color = '#333') {
+  var toast = document.getElementById('toast');
+  var toastMsg = document.getElementById('toast-message');
+  toastMsg.textContent = message;
+  toast.style.background = color;
+  toast.style.display = 'block';
+  setTimeout(function(){ toast.style.opacity = 1; }, 10);
+  setTimeout(function(){ toast.style.opacity = 0; setTimeout(function(){ toast.style.display = 'none'; }, 400); }, 3000);
+}
+
+// Check URL params for toast
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  let toastShown = false;
+  if(params.get('error') === 'emptyfields') {
+    showToast('Please fill in all fields.', '#cf1714');
+    toastShown = true;
+  } else if (params.get('error') === 'min8chars') {
+    showToast('Password must be at least 8 characters long.', '#cf1714');
+    toastShown = true;
+  } else if (params.get('error') === 'passwordmismatch') {
+    showToast('Passwords do not match.', '#cf1714');
+    toastShown = true;
+  } else if (params.get('error') === 'emailexists') {
+    showToast('This email is already registered.', '#cf1714');
+    toastShown = true;
+  } else if (params.get('success') === '1') {
+    showToast('Registration successful! Please log in.', '#28a745');
+    toastShown = true;
+  }
+  // Remove query params after showing toast
+  if (toastShown) {
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+})();
+</script>
 </html>

@@ -118,6 +118,11 @@
      </style>
 </head>
 <body>
+    <!-- Toast Notification -->
+    <div id="toast" style="display:none;position:fixed;top:30px;right:30px;z-index:9999;min-width:220px;padding:16px 24px;background:#333;color:#fff;border-radius:8px;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,0.2);transition:opacity 0.3s;opacity:0;">
+      <span id="toast-message"></span>
+    </div>
+
     <section id="section-1">
 		<div class="header">
 			<header>
@@ -166,10 +171,10 @@
         <h3>Login</h3>
         <class class="container">
         
-        <input type="text" placeholder="Username" id="username" name="username" required>
+        <input type="text" placeholder="Username" id="username" name="username">
         
         
-        <input type="password" placeholder="Password" id="password" name="password" required>
+        <input type="password" placeholder="Password" id="password" name="password">
        
         <input type="submit" value="Login" name="submit">
         <span>Create an account | <a href="signup.php">Sign Up</a></span>
@@ -267,4 +272,31 @@
 
 <script src="main.js"></script>
 <script src="login.js"></script>
+<script>
+// Toast logic
+function showToast(message, color = '#333') {
+  var toast = document.getElementById('toast');
+  var toastMsg = document.getElementById('toast-message');
+  toastMsg.textContent = message;
+  toast.style.background = color;
+  toast.style.display = 'block';
+  setTimeout(function(){ toast.style.opacity = 1; }, 10);
+  setTimeout(function(){ toast.style.opacity = 0; setTimeout(function(){ toast.style.display = 'none'; }, 400); }, 3000);
+}
+
+// Check URL params for toast
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('error') === 'wrongpass') {
+    showToast('Incorrect password. Please try again.', '#cf1714');
+  } else if(params.get('error') === 'nouser') {
+    showToast('User does not exist.', '#cf1714');
+  } else if(params.get('error') === 'emptyfields') {
+    showToast('Please fill in all fields.', '#cf1714');
+  } else if(params.get('success') === '1') {
+    showToast('Login successful! Redirecting to the home page...', '#28a745');
+    setTimeout(function(){ window.location.href = 'project.php'; }, 1000);
+  }
+})();
+</script>
 </html>

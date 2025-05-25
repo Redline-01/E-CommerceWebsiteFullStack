@@ -10,10 +10,8 @@
 		$password = $_POST['password'];
 
 		if (empty($username) || empty($password)) {
-
-			echo "Please fill in all fields
-			";
-
+			header("Location: login.php?error=emptyfields");
+			exit();
 		}
 		else{
 
@@ -37,32 +35,30 @@
 
 		
 			if ($data == false) {
-				
+					// User does not exist
+					header("Location: login.php?error=nouser");
+					exit();
+				}else{
 
-				echo "The user does not exist
-				";
-			}else{
+					if (password_verify($password, $data['password'])) {
+						// Successful login
+						$_SESSION['id'] = $data['id'];
+                        $_SESSION['name'] = $data['name'];
+                        $_SESSION['surname'] = $data['surname'];
+						$_SESSION['username'] = $data['username'];
+						$_SESSION['email'] = $data['email'];
+						$_SESSION['isadmin'] = $data['isadmin'];
 
-				if (password_verify($password, $data['password'])) {
-					
-					$_SESSION['id'] = $data['id'];
-                    $_SESSION['name'] = $data['name'];
-                    $_SESSION['surname'] = $data['surname'];
-					$_SESSION['username'] = $data['username'];
-					$_SESSION['email'] = $data['email'];
-					$_SESSION['isadmin'] = $data['isadmin'];
+						header('Location: login.php?success=1');
+						exit();
+					}
+					else{
+						// Incorrect password
+						header("Location: login.php?error=wrongpass");
+						exit();
+					}
 
-				
-					header('Location: project.php');
 				}
-				else{
-				
-					echo "The password is incorrect";
-					header("Refresh: 2; url=login.php");
-
-				}
-
-			}
 
 		}
 

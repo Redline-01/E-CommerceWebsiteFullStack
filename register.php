@@ -10,23 +10,42 @@
 		$username = $_POST['username'];
 		$email = $_POST['email'];
 
-		$tempPass = $_POST['password'];
-		$password = password_hash($tempPass, PASSWORD_DEFAULT);
+		$tempPass = isset($_POST['password']) ? $_POST['password'] : '';
+		$tempConfirm = isset($_POST['confirmpassword']) ? $_POST['confirmpassword'] : '';
 
-
-
-		$tempConfirm = $_POST['confirm_password'];
-		$confirmpassword = password_hash($tempConfirm, PASSWORD_DEFAULT);
-
-
-		if(empty($name) || empty($surname) || empty($username) || empty($email) || empty($password) || empty($confirmpassword))
+		// Only hash after validation
+		if(empty($name) || empty($surname) || empty($username) || empty($email) || empty($tempPass) || empty($tempConfirm))
 		{
-			echo "You have not filled in all the fields.";
+			header("Location: signup.php?error=emptyfields");
+			exit();
+		}
+		// Check for existing email
+		$checkEmailSql = "SELECT COUNT(*) FROM login WHERE email = :email";
+		$checkEmailStmt = $conn->prepare($checkEmailSql);
+		$checkEmailStmt->bindParam(':email', $email);
+		$checkEmailStmt->execute();
+		$emailExists = $checkEmailStmt->fetchColumn();
+
+		if ($emailExists) {
+			header("Location: signup.php?error=emailexists");
+			exit();
+		}
+		else if (strlen($tempPass) < 8) {
+			header("Location: signup.php?error=min8chars");
+			exit();
+		}
+		else if ($tempPass !== $tempConfirm) {
+			header("Location: signup.php?error=passwordmismatch");
+			exit();
 		}
 		else
 		{
+			// Hash after validation
+			$password = password_hash($tempPass, PASSWORD_DEFAULT);
+			$confirmpassword = password_hash($tempConfirm, PASSWORD_DEFAULT);
 
-			$sql = "INSERT INTO login(name,surname,username,email,password, confirmpassword) VALUES (:name, :surname, :username, :email, :password, :confirmpassword)";
+
+			$sql = "INSERT INTO login(name,surname,username,email,password, confirmpassword, isadmin) VALUES (:name, :surname, :username, :email, :password, :confirmpassword, 0)";
 
 			$insertSql = $conn->prepare($sql);
 			
@@ -40,8 +59,8 @@
 
 			$insertSql->execute();
 
-			header("Location:login.php");
-
+			header("Location:login.php?success=1");
+			exit();
 
 		}
 
