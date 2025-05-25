@@ -170,14 +170,12 @@
           <td><?php echo $product_data['price']; ?> &euro;</td>
           <td><?php echo $product_data['approve']; ?></td>
           <?php if ($_SESSION['isadmin'] == 'true') { ?>
-            <td>
-              <button class="btn btn-success">
-                <a href="approve.php?id=<?= $product_data['id'];?>&approve_email=1&orderid=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Approve</a>
-              </button>
-              <button class="btn btn-danger">
-                <a href="decline.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Decline</a>
-              </button>
-              <button class="btn btn-info" onclick="window.open('invoice.php?orderid=<?= $product_data['id']; ?>&send_email=1', '_blank')">Send Invoice</button>
+            <td class="p-0">
+              <div class="d-grid gap-2">
+                <a href="approve.php?id=<?= $product_data['id'];?>&approve_email=1&orderid=<?= $product_data['id'];?>" class="btn btn-success w-100 mb-1" style="font-weight:bold;">Approve</a>
+                <a href="decline.php?id=<?= $product_data['id'];?>" class="btn btn-danger w-100 mb-1" style="font-weight:bold;">Decline</a>
+                <button class="btn btn-info w-100" onclick="window.open('invoice.php?orderid=<?= $product_data['id']; ?>&send_email=1', '_blank')">Send Invoice</button>
+              </div>
             </td>
           <?php } ?>
         </tr>
