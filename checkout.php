@@ -482,38 +482,35 @@ function updateCheckoutCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartList = document.getElementById('cartList');
     const cartCount = document.getElementById('cartCount');
-    const totalElement = document.querySelector('.list-group-item strong');
-    
     // Update count
     const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
     cartCount.textContent = itemCount;
-    
     // Update list
     cartList.innerHTML = '';
     let totalPrice = 0;
-    
     if (cart.length === 0) {
-        cartList.innerHTML = '<li class="list-group-item">Your cart is empty</li>';
-    } else {
-        cart.forEach(item => {
-            const itemTotal = item.price * item.quantity;
-            totalPrice += itemTotal;
-            
-            cartList.innerHTML += `
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">${item.name}</h6>
-                        <small class="text-muted">Quantity: ${item.quantity}</small>
-                    </div>
-                    <span class="text-muted">€${itemTotal.toFixed(2)}</span>
-                </li>
-            `;
-        });
+        cartList.innerHTML += '<li class="list-group-item">Your cart is empty</li>';
     }
-    
-    // Update total
-    totalElement.textContent = `€${totalPrice.toFixed(2)}`;
-    
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        totalPrice += itemTotal;
+        cartList.innerHTML += `
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                    <h6 class="my-0">${item.name}</h6>
+                    <small class="text-muted">Quantity: ${item.quantity}</small>
+                </div>
+                <span class="text-muted">€${itemTotal.toFixed(2)}</span>
+            </li>
+        `;
+    });
+    // Always add the total row
+    cartList.innerHTML += `
+        <li class="list-group-item d-flex justify-content-between">
+            <span>Total (EUR)</span>
+            <strong name="price">€${totalPrice.toFixed(2)}</strong>
+        </li>
+    `;
     // Update hidden form field for submission
     document.querySelector('input[name="cart_data"]').value = JSON.stringify(cart);
 }
