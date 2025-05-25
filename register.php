@@ -45,7 +45,7 @@
 			$confirmpassword = password_hash($tempConfirm, PASSWORD_DEFAULT);
 
 
-			$sql = "INSERT INTO login(name,surname,username,email,password, confirmpassword, isadmin) VALUES (:name, :surname, :username, :email, :password, :confirmpassword, 0)";
+			$sql = "INSERT INTO login(name,surname,username,email,password, confirmpassword, isadmin) VALUES (:name, :surname, :username, :email, :password, :confirmpassword, 'false')";
 
 			$insertSql = $conn->prepare($sql);
 			
