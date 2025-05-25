@@ -161,8 +161,10 @@
         </table>
       </div>
      <?php  } else {
-        
 
+        echo "<h2>Welcome to your dashboard, ".$_SESSION['username']."!</h2>";
+        echo "<p>You can update your profile or view your orders.</p>";
+        
     } ?>
     </main>
   </div>
