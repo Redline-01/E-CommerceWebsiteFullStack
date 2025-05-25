@@ -171,6 +171,7 @@
 		<li><a href="products.php">Products</a></li>
 		<li><a href="shop.php">Shop</a></li>
 		<li><a href="#">Contact</a></li>
+		<li><a href="dashboard.php">Dashboard</a></li>
 	</div>
 
 	<div class="footer-content">
