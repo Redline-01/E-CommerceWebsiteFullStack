@@ -167,16 +167,17 @@
           <td>
                 <?= nl2br(htmlspecialchars($product_data['productname'])) ?>
           </td>
-          <td><?php echo $product_data['price']; ?></td>
+          <td><?php echo $product_data['price']; ?> &euro;</td>
           <td><?php echo $product_data['approve']; ?></td>
           <?php if ($_SESSION['isadmin'] == 'true') { ?>
             <td>
               <button class="btn btn-success">
-                <a href="approve.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Approve</a>
+                <a href="approve.php?id=<?= $product_data['id'];?>&approve_email=1&orderid=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Approve</a>
               </button>
               <button class="btn btn-danger">
                 <a href="decline.php?id=<?= $product_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Decline</a>
               </button>
+              <button class="btn btn-info" onclick="window.open('invoice.php?orderid=<?= $product_data['id']; ?>&send_email=1', '_blank')">Send Invoice</button>
             </td>
           <?php } ?>
         </tr>
