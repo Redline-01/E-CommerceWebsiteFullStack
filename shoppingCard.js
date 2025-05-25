@@ -1,3 +1,7 @@
+if (!localStorage.getItem('cart')) {
+    localStorage.setItem('cart', JSON.stringify([]));
+}
+
 let cart = []; 
 
 
@@ -69,7 +73,7 @@ function updateCart() {
   
     cartItemsContainer.innerHTML = '';
 
-    if (cart.length === 0) {
+    if (cart.length === null || cart.length === 0) {
         
         cartItemsContainer.innerHTML = '<p id="cartempty">Your cart is empty</p>';
         cartTotal.innerHTML = 'Total: $0.00';
@@ -168,6 +172,5 @@ document.addEventListener('click', function(event) {
 //       myDiv.classList.remove('fixed');
 //     }
 //   });
- 
 
- 
+
