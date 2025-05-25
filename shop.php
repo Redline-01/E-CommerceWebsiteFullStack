@@ -6,16 +6,25 @@
           header("Location: login.php");
     }
    
-    $sql = "SELECT * FROM login";
-    $selectUsers = $conn->prepare($sql);
-    $selectUsers->execute();
+    // Pagination setup
+    $productsPerPage = 9;
+    $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+    $offset = ($page - 1) * $productsPerPage;
 
-    $users_data = $selectUsers->fetchAll();
+    // Get total product count
+    $countSql = "SELECT COUNT(*) FROM shopproducts";
+    $countStmt = $conn->prepare($countSql);
+    $countStmt->execute();
+    $totalProducts = $countStmt->fetchColumn();
+    $totalPages = ceil($totalProducts / $productsPerPage);
 
-	$sql_1 = "SELECT * FROM shopproducts";
-   $selectProducts = $conn->prepare($sql_1);
-   $selectProducts->execute();
-   $products_data = $selectProducts->fetchAll();
+    // Fetch paginated products
+    $sql_1 = "SELECT * FROM shopproducts LIMIT :limit OFFSET :offset";
+    $selectProducts = $conn->prepare($sql_1);
+    $selectProducts->bindValue(':limit', $productsPerPage, PDO::PARAM_INT);
+    $selectProducts->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $selectProducts->execute();
+    $products_data = $selectProducts->fetchAll();
 
 
 ?>
@@ -315,9 +324,11 @@
         <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
     </div>
 
-	<?php foreach ($products_data as $product_data) {
+	<?php 
+	$productCount = 0;
+	foreach ($products_data as $product_data) {
 		$price = floatval($product_data['price']);
-		
+		$productCount++;
 		?>
 		  
 		<div class="buyShop" name="buyProduct" data-name="<?php echo strtolower($product_data['nameProducts']); ?>">
@@ -335,9 +346,28 @@
         
         </div>
 
-
-		<?php } ?>
-
+        <?php 
+        // Show pagination at the end of the page (after last product on this page)
+        if ($productCount == count($products_data) && $totalPages > 1) {
+            ?>
+            <div style="width:100%;text-align:center;margin:30px 0;">
+                <div style="display:inline-flex;justify-content:center;align-items:center;gap:4px;flex-wrap:wrap;">
+                <?php if ($page > 1): ?>
+                    <a href="shop.php?page=<?= $page - 1 ?>" style="display:inline-block;padding:8px 16px;border-radius:4px;background:#f8f9fa;color:#333;text-decoration:none;font-weight:bold;">&laquo; Prev</a>
+                <?php endif; ?>
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="shop.php?page=<?= $i ?>" style="display:inline-block;padding:8px 16px;border-radius:4px;background:<?= $i == $page ? '#333030' : '#f8f9fa' ?>;color:<?= $i == $page ? 'white' : '#333' ?>;text-decoration:none;font-weight:bold;box-shadow:0 2px 6px rgba(0,0,0,0.08);">
+                        <?= $i ?>
+                    </a>
+                <?php endfor; ?>
+                <?php if ($page < $totalPages): ?>
+                    <a href="shop.php?page=<?= $page + 1 ?>" style="display:inline-block;padding:8px 16px;border-radius:4px;background:#f8f9fa;color:#333;text-decoration:none;font-weight:bold;">Next &raquo;</a>
+                <?php endif; ?>
+                </div>
+            </div>
+            <?php
+        }
+    } ?>
 
 
 		<div id="favoriteModal" class="modal">

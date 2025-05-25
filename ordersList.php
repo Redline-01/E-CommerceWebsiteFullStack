@@ -143,6 +143,9 @@
         <th scope="col">Client</th>
         <th scope="col">E-mail</th>
         <th scope="col">Address</th>
+        <th scope="col">Country</th>
+        <th scope="col">City</th>
+        <th scope="col">Zip</th>
         <th scope="col">Product(s)</th>
         <th scope="col">Price</th>
         <th scope="col">Confirmation</th>
@@ -158,6 +161,9 @@
           <td><?php echo $product_data['client']; ?></td>
           <td><?php echo $product_data['email']; ?></td>
           <td><?php echo $product_data['address']; ?></td>
+          <td><?php echo $product_data['country']; ?></td>
+          <td><?php echo $product_data['city']; ?></td>
+          <td><?php echo $product_data['zip']; ?></td>
           <td>
                 <?= nl2br(htmlspecialchars($product_data['productname'])) ?>
           </td>

@@ -303,6 +303,7 @@ if(isset($_COOKIE['cartData'])) {
         <div class="col-md-8 order-md-1">
             <h4 class="mb-3">Billing address</h4>
             <form class="needs-validation" novalidate="" action="checkoutInfo.php" method="POST">
+                
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="firstName">Full name</label>
@@ -317,7 +318,7 @@ if(isset($_COOKIE['cartData'])) {
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input type="text" class="form-control" id="username" placeholder="Username" required="">
+                        <input type="text" class="form-control" id="client" name="client" value="<?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : ''; ?>" readonly required>
                         <div class="invalid-feedback" style="width: 100%;"> Your username is required. </div>
                     </div>
                 </div>
@@ -326,80 +327,27 @@ if(isset($_COOKIE['cartData'])) {
                     <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email" required="">
                     <div class="invalid-feedback"> Please enter a valid email address for shipping updates. </div>
                 </div>
-                <div class="mb-3">
-                    <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="" name="address">
-                    <div class="invalid-feedback"> Please enter your shipping address. </div>
-                </div>
-                <div class="mb-3">
-                    <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite" name="address2">
-                </div>
                 <div class="row">
                     <div class="col-md-5 mb-3">
                         <label for="country">Country</label>
-                        <select class="custom-select d-block w-100" id="country" required="" name="country">
-                            <option value="">Choose...</option>
-                            <option>Kosova</option>
-                        </select>
-                        <div class="invalid-feedback"> Please select a valid country. </div>
+                        <input type="text" class="form-control" id="country" name="country" required>
+                        <div class="invalid-feedback"> Please enter your country. </div>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="state">City</label>
-                        <select class="custom-select d-block w-100" id="state" required="" name="city">
-                            <option value="">Choose...</option>
-                            <option>Prishtina</option>
-							<option>Gjilan</option>
-							<option>Podujeve</option>
-							<option>Fushe Kosove</option>
-							<option>Peje</option>
-							<option>Prizren</option>
-							<option>Gjakove</option>
-							<option>Decan</option>
-							<option>Istog</option>
-							<option>Kline</option>
-							<option>Malisheve</option>
-							<option>Kamenice</option>
-							<option>Viti</option>
-							<option>Kacanik</option>
-							<option>Skenderaj</option>
-							<option>Suhareke</option>
-							<option>Rahovec</option>
-							<option>Lipjan</option>
-							<option>Obiliq</option>
-							<option>Gracanice</option>
-							<option>Kllokot</option>
-							<option>Zubin Potok</option>
-							<option>Zvecan</option>
-							<option>Mitrovice</option>
-							<option>Ranillug</option>
-							<option>Partesh</option>
-							<option>Klokot</option>
-							<option>Novoberde</option>
-							<option>Gllogovc</option>
-							<option>Junik</option>
-							<option>Dragash</option>
-							<option>Skenderaj</option>
-							<option>Therande</option>
-							<option>Deqan</option>
-							<option>Klina</option>
-                        </select>
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" name="city" required>
                         <div class="invalid-feedback"> Please provide a valid city. </div>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="zip">Zip</label>
-                        <input type="text" class="form-control" id="zip" placeholder="" required="">
+                        <input type="text" class="form-control" id="zip" placeholder="" required name="zip">
                         <div class="invalid-feedback"> Zip code required. </div>
                     </div>
+                      <div class="mb-3">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="" name="address">
+                    <div class="invalid-feedback"> Please enter your shipping address. </div>
                 </div>
-                <hr class="mb-4">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="same-address">
-                    <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="save-info">
-                    <label class="custom-control-label" for="save-info">Save this information for next time</label>
                 </div>
                 <hr class="mb-4">
                 <h4 class="mb-3">Payment</h4>

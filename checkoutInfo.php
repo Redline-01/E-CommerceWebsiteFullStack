@@ -8,7 +8,7 @@ if (empty($_SESSION['id'])) {
     exit();
 }
 
-if (empty($_POST['client']) || empty($_POST['email']) || empty($_POST['address'])) {
+if (empty($_POST['client']) || empty($_POST['email']) || empty($_POST['address']) || empty($_POST['country']) || empty($_POST['city']) || empty($_POST['zip'])) {
     die("Error: Required fields are missing.");
 }
 
@@ -32,8 +32,8 @@ try {
 
     // Insert into orders table
     $stmt = $conn->prepare("
-        INSERT INTO orders (userid, client, email, address, productname, price, approve) 
-        VALUES (:userid, :client, :email, :address, :productname, :price, 'Ne Procesim')
+        INSERT INTO orders (userid, client, email, address, country, city, zip, productname, price, approve) 
+        VALUES (:userid, :client, :email, :address, :country, :city, :zip, :productname, :price, 'Ne Procesim')
     ");
     
     $stmt->execute([
@@ -41,16 +41,19 @@ try {
         ':client' => $_POST['client'],
         ':email' => $_POST['email'],
         ':address' => $_POST['address'],
+        ':country' => $_POST['country'],
+        ':city' => $_POST['city'],
+        ':zip' => $_POST['zip'],
         ':productname' => implode(', ', $productNames), // Combine product names
         ':price' => $total
     ]);
 
     $conn->commit();
 
-    // Clear the cart
+    // Clear the cart and redirect using JS after order is processed
     echo "<script>
         localStorage.removeItem('cart');
-        window.location.href = 'ordersList.php';
+        setTimeout(function() { window.location.href = 'ordersList.php'; }, 300);
     </script>";
     exit();
 
