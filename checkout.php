@@ -17,7 +17,7 @@ document.cookie = "cartData=" + JSON.stringify(cartFromStorage) + "; path=/";
 </script>
 
 <?php
-// Now check for the cookie data
+// check for the cookie data
 if(isset($_COOKIE['cartData'])) {
     $cartItems = json_decode($_COOKIE['cartData'], true);
     foreach ($cartItems as $item) {
