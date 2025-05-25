@@ -59,7 +59,7 @@
 </header>
 
 <style>
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
   #dashboardBrand {
     margin-left: 50px;
     font-size: 1rem;
