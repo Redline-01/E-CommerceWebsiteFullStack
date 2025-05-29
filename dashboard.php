@@ -46,6 +46,7 @@
       <a class="nav-link px-3" href="logout.php">Sign out</a>
     </div>
   </div>
+  
   <!-- Dropdown menu for mobile -->
   <ul class="dropdown-menu d-md-none" id="mobileNavDropdown" style="left:10px; top:60px;">
     <?php if ($_SESSION['isadmin'] == 'true') { ?>
@@ -92,7 +93,6 @@
 </style>
 
 <script>
-// Show/hide dropdown on toggler click (mobile only)
 document.addEventListener('DOMContentLoaded', function() {
   var toggler = document.querySelector('.navbar-toggler');
   var dropdown = document.getElementById('mobileNavDropdown');

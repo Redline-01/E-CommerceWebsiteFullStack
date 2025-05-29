@@ -41,7 +41,7 @@ try {
         ':country' => $_POST['country'],
         ':city' => $_POST['city'],
         ':zip' => $_POST['zip'],
-        ':productname' => implode(', ', $productNames), // Combine product names
+        ':productname' => implode(', ', $productNames),
         ':price' => $total
     ]);
 
