@@ -39,7 +39,7 @@ function updateTotal() {
 
 
 
-function addToCart(productName, productPrice) {
+function addToCart(productName, productPrice, productImage) {
     let existingProduct = cart.find(item => item.name === productName);
 
     if (existingProduct) {
@@ -48,7 +48,8 @@ function addToCart(productName, productPrice) {
         cart.push({
             name: productName,
             price: parseFloat(productPrice),
-            quantity: 1
+            quantity: 1,
+            image: productImage 
         });
     }
 
@@ -65,42 +66,33 @@ function addToCart(productName, productPrice) {
     updateNotificationDot();
 }
 
-
 function updateCart() {
     const cartItemsContainer = document.querySelector('.cart-items');
     const cartTotal = document.getElementById('cartTotal');
 
-  
     cartItemsContainer.innerHTML = '';
 
     if (cart.length === null || cart.length === 0) {
-        
         cartItemsContainer.innerHTML = '<p id="cartempty">Your cart is empty</p>';
         cartTotal.innerHTML = 'Total: $0.00';
         return;
     }
-    
 
     let total = 0;
-    cart.forEach(item => {
+    cart.forEach((item, idx) => {
         const itemTotal = item.price * item.quantity;
         total += itemTotal;
-
         cartItemsContainer.innerHTML += `
-            <div class="cart-item">
-                <span>${item.name}</span>
-                <span>&euro;${item.price.toFixed(2)}</span>
-                <input type="number" value="${item.quantity}" min="1" data-name="${item.name}" data-price="${item.price}" onchange="updateQuantity(event)">
-                <button class="removebtn" onclick="deleteItem(event, ${cart.indexOf(item)})">X</button>
+            <div class="cart-item" style="display:flex;align-items:center;gap:18px;margin-bottom:15px;">
+                <img src="${item.image || 'images/hyperx.png'}" class="cart-item-image" style="width:54px;height:54px;object-fit:cover;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-right:8px;" onerror="this.onerror=null;this.src='images/hyperx.png';">
+                <span class="cart-item-title" style="font-weight:600;font-size:1.08rem;min-width:110px;max-width:140px;white-space:normal;word-break:break-word;overflow-wrap:break-word;">${item.name}</span>
+                <span class="cart-item-price" style="color:#f43f5e;font-weight:500;min-width:60px;">&euro;${item.price.toFixed(2)}</span>
+                <input type="number" value="${item.quantity}" min="1" data-name="${item.name}" data-price="${item.price}" onchange="updateQuantity(event)" style="width:48px;text-align:center;margin-left:8px;margin-right:8px;">
+                <button class="removebtn" onclick="deleteItem(event, ${idx})" style="margin-left:8px;">X</button>
             </div>
         `;
     });
-
-
-    
-    cartTotal.innerHTML = `Total: €${total.toFixed(2)}`;
-
-    
+    cartTotal.innerHTML = `Total: &euro;${total.toFixed(2)}`;
 };
 
 function deleteItem(event, index) {

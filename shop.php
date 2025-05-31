@@ -11,14 +11,12 @@
     $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
     $offset = ($page - 1) * $productsPerPage;
 
-    // Get total product count
     $countSql = "SELECT COUNT(*) FROM shopproducts";
     $countStmt = $conn->prepare($countSql);
     $countStmt->execute();
     $totalProducts = $countStmt->fetchColumn();
     $totalPages = ceil($totalProducts / $productsPerPage);
 
-    // Fetch paginated products
     $sql_1 = "SELECT * FROM shopproducts LIMIT :limit OFFSET :offset";
     $selectProducts = $conn->prepare($sql_1);
     $selectProducts->bindValue(':limit', $productsPerPage, PDO::PARAM_INT);
@@ -122,8 +120,8 @@
         .shopping-cart {
             position: fixed;
             top: 0;
-            right: -400px;
-            width: 400px;
+            right: -480px;
+            width: 480px;
             height: 100%;
             background-color: #f8f9fa;
             box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
@@ -247,7 +245,32 @@
 	color: white;
 	border: 1px solid red;
 }
-
+.cart-item-image {
+  width: 70px;
+  height: 70px;
+  min-width: 70px;
+  min-height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-right: 12px;
+  background: #f8f9fa;
+  display: block;
+}
+.cart-item-title {
+  font-weight: 600;
+  font-size: 1.08rem;
+}
+.cart-item-price {
+  color: #f43f5e;
+  font-weight: 500;
+}
+.cart-item-controls {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 	</style>
 
 </head>
@@ -308,12 +331,9 @@
 <div class="shopping-cart" id="shoppingCart">
 	<button class="close-cart" onclick="toggleCart()">&times;</button>
 	<div class="shopping-cart-header">Your Cart</div>
-	<div class="cart-items">
-		<div class="cart-item">
-			
-			
-		</div>
-	</div>
+	<div class="cart-items"> 
+
+    </div>
 	<div class="cart-total" id="cartTotal">Total: </div>
 	<a href="checkout.php" class="continue-button">Continue to Checkout</a>
 </div>
@@ -331,23 +351,22 @@
 		$productCount++;
 		?>
 		  
-		<div class="buyShop" name="buyProduct" data-name="<?php echo strtolower($product_data['nameProducts']); ?>">
-
+		<div class="buyShop" name="buyProduct" data-name="<?php echo htmlspecialchars($product_data['nameProducts']); ?>" data-price="<?php echo htmlspecialchars($product_data['price']); ?>" data-image="images/<?php echo htmlspecialchars($product_data['imageProducts']); ?>" onclick="showProductModal(this)">
            <div class="product-box">
 
-			<img src="images/<?php  echo $product_data['imageProducts']; ?>" width="300px" height="300px" class="product-image">
-			<h3 class="product-name"><?php echo $product_data['nameProducts']; ?></h3>
-			<button id="buybtn" onclick="addToCart('<?php echo addslashes($product_data['nameProducts']); ?>', '<?php echo $product_data['price']; ?>')">
+			<img src="images/<?php  echo htmlspecialchars($product_data['imageProducts']); ?>" width="300px" height="300px" class="product-image">
+			<h3 class="product-name"><?php echo htmlspecialchars($product_data['nameProducts']); ?></h3>
+			<button id="buybtn" onclick="event.stopPropagation();addToCart('<?php echo addslashes($product_data['nameProducts']); ?>', '<?php echo $product_data['price']; ?>', 'images/<?php echo addslashes($product_data['imageProducts']); ?>')">
             <img class="img-shop" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAe1JREFUWEftlz0yhEEQhp+twikESEgkLoBE6gokZE5AoTiBjARHkEpwAYmExE+VU6CKfdV8W1OzO9Mzsz+1wXYimJ7uZ/vt6f60GDNrjRkPEyBLkbBCh8GFa+DdCjLI8xDot0fwI+B4kElTsXKAdH8buBoFVEqyubZcWw7iHljPAFoDVp3fA6B7RZZ6ZQK6a1dGf2XzGf2kHpTEsiqprWd/6VUpJ8HQgSSBqtSYVaWhAwnkzZPNau6RAPlJwubuNSZKXnWXr9VDzQW/Sr5stUDR15gL5De35pGkk9UC+fc0TjrjIRcot7lzesj30VpSxTuWCxQ2d2wE5AAlR0kJkKa2gsn0y1TqcPFaQBqy6sfGuvKXAOWMAAsoKZcSlAKlRoDiWbvMnGmlQDX7rZHHl6urmaMapqaaOyvdb01IS85/v9IKNbL4+63Z7tZv8f2iO7EGKGxuCyQ8j8pVWyHd88tfCpT8jKmtUPiicqE+rE/hfoByIYr8+gE6d0v2FdgDbiOZN4AzYMFN+t0UYS2Qv0YU/wVYiiR6Bha9s+RHXi3QPnDiJfkGZiJAX8C0d3YAnMaqVAu0DDy2A0+5wBdATApJu+P8foAV4GnQQIonqE3g03o57j+XWeAmBdPPHCp6OSXOtZKV5CjynQBZ5foDkI1sJb53g8kAAAAASUVORK5CYII="/> Add to Cart
         </button>
 		<h3 class="price">&euro; <?php echo number_format($price, 2); ?></h3>
-			<div class="heart-icon"><img src="images/heart.png" width="40px" height="40px" class="heart-img"  onclick="openFavoriteModal('<?php echo addslashes($product_data['nameProducts']); ?>')"></div>
-		   </div>
+		<div class="heart-icon" onclick="event.stopPropagation();openFavoriteModal('<?php echo addslashes($product_data['nameProducts']); ?>')"><img src="images/heart.png" width="40px" height="40px" class="heart-img"></div>
+	   </div>
         
         </div>
 
         <?php 
-        // Show pagination at the end of the page (after last product on this page)
+
         if ($productCount == count($products_data) && $totalPages > 1) {
             ?>
             <div style="width:100%; text-align:center; margin:30px 0;">
@@ -402,7 +421,7 @@
 
 
 
-    </section>
+</section>
 
 
 
@@ -504,4 +523,105 @@
 <script src="shoppingCard.js"></script>
 <script src="script.js"></script>
 
+<!-- Product Modal -->
+<div id="productModal" class="modal" style="display:none;">
+  <div class="modal-content" style="
+    border-radius: 24px;
+    max-width: 600px;
+    min-width: 320px;
+    min-height: 260px;
+    box-shadow: 0 12px 48px rgba(34,34,68,0.18);
+    background: linear-gradient(120deg, #fff 70%, #f8f9fa 100%);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    border: none;
+  ">
+    <div style="background:rgb(41, 27, 30); min-width: 210px; display: flex; align-items: center; justify-content: center;">
+      <img id="modalImage" src="" alt="Product Image" style="width: 170px; height: 170px; object-fit: cover; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.10); display: block; margin: 5px;">
+    </div>
+    <div style="flex:1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 38px 36px 38px 36px; position: relative; background: transparent;">
+      <span class="close" onclick="closeProductModal()" style="position: absolute; top: 18px; right: 18px; color: #e11d48; font-size: 2.2rem; font-weight: bold; cursor: pointer; z-index: 10; transition: color 0.2s; background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(225,29,72,0.10);">&times;</span>
+      <h3 id="modalName" style="font-family: 'Work Sans', sans-serif; font-weight: 800; font-size: 1.5rem; margin: 0 0 12px 0; color: #222; letter-spacing: 0.5px;">Product Name</h3>
+      <div id="modalPrice" style="color: #f43f5e; font-size: 1.25rem; font-weight: 700; margin-bottom: 22px; letter-spacing: 0.2px;">€ 0.00</div>
+      <button id="modalAddToCart" style="background: linear-gradient(90deg,#e11d48 0%,#f43f5e 100%); color: #fff; border: none; border-radius: 50px; padding: 14px 44px; font-size: 1.12rem; font-weight: 700; box-shadow: 0 2px 12px rgba(225,29,72,0.13); cursor: pointer; transition: background 0.2s, box-shadow 0.2s; margin-top: 10px; letter-spacing: 0.5px;">Add to Cart</button>
+    </div>
+  </div>
+</div>
+<script>
+function showProductModal(el) {
+  var name = el.getAttribute('data-name');
+  var price = el.getAttribute('data-price');
+  var image = el.getAttribute('data-image');
+  document.getElementById('modalName').textContent = name;
+  document.getElementById('modalPrice').textContent = '€ ' + parseFloat(price).toFixed(2);
+  document.getElementById('modalImage').src = image;
+  document.getElementById('productModal').style.display = 'block';
+  document.body.style.overflow = 'hidden'; // Prevent background scroll
+  document.getElementById('modalAddToCart').onclick = function() {
+    addToCart(name, price, image);
+    closeProductModal();
+  };
+}
+function closeProductModal() {
+  document.getElementById('productModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+window.addEventListener('click', function(event) {
+  var modal = document.getElementById('productModal');
+  if (event.target === modal) {
+    closeProductModal();
+  }
+});
+
+function openFavoriteModal(productName) {
+  document.getElementById('favoriteTitle').textContent = productName;
+  document.getElementById('favoriteMessage').textContent = 'You favorited ' + productName + '!';
+  document.getElementById('favoriteModal').style.display = 'block';
+  document.body.style.overflow = 'hidden';
+}
+
+// Close favorite modal logic
+(function() {
+  var favModal = document.getElementById('favoriteModal');
+  var favClose = favModal.querySelector('.close');
+  favClose.onclick = function() {
+    favModal.style.display = 'none';
+    document.body.style.overflow = '';
+  };
+  window.addEventListener('click', function(event) {
+    if (event.target === favModal) {
+      favModal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+})();
+</script>
+
+<!-- Toaster Notification -->
+<div id="toaster" style="display:none;position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:linear-gradient(90deg,#23272f 0%,#444950 100%);color:#fff;padding:18px 38px;border-radius:32px;box-shadow:0 4px 24px rgba(34,39,47,0.13);font-size:1.1rem;font-weight:600;z-index:2000;transition:opacity 0.4s;opacity:0;pointer-events:none;letter-spacing:0.2px;text-align:center;">Product added to cart!</div>
+<script>
+function showToaster(message) {
+  var toaster = document.getElementById('toaster');
+  toaster.textContent = message || 'Product added to cart!';
+  toaster.style.display = 'block';
+  setTimeout(function() { toaster.style.opacity = '1'; }, 10);
+  setTimeout(function() {
+    toaster.style.opacity = '0';
+    setTimeout(function() { toaster.style.display = 'none'; }, 400);
+  }, 1800);
+}
+
+var _originalAddToCart = window.addToCart;
+window.addToCart = function(name, price) {
+  if (_originalAddToCart) _originalAddToCart.apply(this, arguments);
+  showToaster('"' + name + '" added to cart!');
+};
+</script>
 </html>
