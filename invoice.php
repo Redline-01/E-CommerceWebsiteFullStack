@@ -1,16 +1,20 @@
 <?php
 include_once('config.php');
+
 if (empty($_GET['orderid'])) {
     die('Order ID missing.');
 }
+
 $orderid = intval($_GET['orderid']);
 $stmt = $conn->prepare("SELECT orders.*, login.username, login.email as user_email FROM orders INNER JOIN login ON orders.userid = login.id WHERE orders.id = :orderid");
 $stmt->bindParam(':orderid', $orderid);
 $stmt->execute();
 $order = $stmt->fetch();
+
 if (!$order) {
     die('Order not found.');
 }
+
 // Prepare product details
 $names = preg_split('/\r?\n/', $order['productname']);
 $ids = [];
@@ -25,7 +29,7 @@ if (!empty($order['productids'])) {
 
 // If ?send_email=1 is set, send the invoice as HTML email to the client
 if (isset($_GET['send_email']) && $_GET['send_email'] == '1') {
-    $to = $order['email']; // orders.email should be set per order
+    $to = $order['email']; 
     $subject = "Your Invoice for Order #$orderid";
     ob_start();
     ?>

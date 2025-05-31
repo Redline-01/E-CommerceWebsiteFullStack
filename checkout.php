@@ -477,15 +477,13 @@ if(isset($_COOKIE['cartData'])) {
 
 
 <script>
-// Real-time cart update function
 function updateCheckoutCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const cartList = document.getElementById('cartList');
     const cartCount = document.getElementById('cartCount');
-    // Update count
     const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
     cartCount.textContent = itemCount;
-    // Update list
+    
     cartList.innerHTML = '';
     let totalPrice = 0;
     if (cart.length === 0) {

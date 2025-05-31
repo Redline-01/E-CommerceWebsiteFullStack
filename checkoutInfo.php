@@ -2,7 +2,6 @@
 include_once('config.php');
 session_start();
 
-// Validate session and input
 if (empty($_SESSION['id'])) {
     header("Location: login.php");
     exit();
@@ -21,7 +20,6 @@ if (json_last_error() !== JSON_ERROR_NONE || !is_array($cartData)) {
 try {
     $conn->beginTransaction();
 
-    // Calculate total price
     $total = 0;
     $productNames = [];
     foreach ($cartData as $item) {
@@ -30,7 +28,6 @@ try {
 }
 
 
-    // Insert into orders table
     $stmt = $conn->prepare("
         INSERT INTO orders (userid, client, email, address, country, city, zip, productname, price, approve) 
         VALUES (:userid, :client, :email, :address, :country, :city, :zip, :productname, :price, 'Pending Approval')
@@ -44,7 +41,7 @@ try {
         ':country' => $_POST['country'],
         ':city' => $_POST['city'],
         ':zip' => $_POST['zip'],
-        ':productname' => implode(', ', $productNames), // Combine product names
+        ':productname' => implode(', ', $productNames),
         ':price' => $total
     ]);
 
