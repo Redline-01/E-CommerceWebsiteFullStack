@@ -547,10 +547,10 @@
       <img id="modalImage" src="" alt="Product Image" style="width: 170px; height: 170px; object-fit: cover; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.10); display: block; margin: 5px;">
     </div>
     <div style="flex:1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 38px 36px 38px 36px; position: relative; background: transparent;">
-      <span class="close" onclick="closeProductModal()" style="position: absolute; top: 18px; right: 18px; color: #e11d48; font-size: 2.2rem; font-weight: bold; cursor: pointer; z-index: 10; transition: color 0.2s; background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(225,29,72,0.10);">&times;</span>
+      <span class="close" onclick="closeProductModal()" style="position: absolute; top: 18px; right: 18px; color: #333030; font-size: 2.2rem; font-weight: bold; cursor: pointer; z-index: 10; transition: color 0.2s; background: #fff; border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(225,29,72,0.10);">&times;</span>
       <h3 id="modalName" style="font-family: 'Work Sans', sans-serif; font-weight: 800; font-size: 1.5rem; margin: 0 0 12px 0; color: #222; letter-spacing: 0.5px;">Product Name</h3>
-      <div id="modalPrice" style="color: #f43f5e; font-size: 1.25rem; font-weight: 700; margin-bottom: 22px; letter-spacing: 0.2px;">€ 0.00</div>
-      <button id="modalAddToCart" style="background: linear-gradient(90deg,#e11d48 0%,#f43f5e 100%); color: #fff; border: none; border-radius: 50px; padding: 14px 44px; font-size: 1.12rem; font-weight: 700; box-shadow: 0 2px 12px rgba(225,29,72,0.13); cursor: pointer; transition: background 0.2s, box-shadow 0.2s; margin-top: 10px; letter-spacing: 0.5px;">Add to Cart</button>
+      <div id="modalPrice" style="color: #333030; font-size: 1.25rem; font-weight: 700; margin-bottom: 22px; letter-spacing: 0.2px;">€ 0.00</div>
+      <button id="modalAddToCart" style="background: linear-gradient(90deg,#23272f 0%,#444950 100%); color: #fff; border: none; border-radius: 50px; padding: 14px 44px; font-size: 1.12rem; font-weight: 700; box-shadow: 0 2px 12px rgba(34,39,47,0.13); cursor: pointer; transition: background 0.2s, box-shadow 0.2s; margin-top: 10px; letter-spacing: 0.5px;">Add to Cart</button>
     </div>
   </div>
 </div>
