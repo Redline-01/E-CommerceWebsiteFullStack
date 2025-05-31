@@ -86,7 +86,7 @@ function updateCart() {
             <div class="cart-item" style="display:flex;align-items:center;gap:18px;margin-bottom:15px;">
                 <img src="${item.image || 'images/hyperx.png'}" class="cart-item-image" style="width:54px;height:54px;object-fit:cover;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);margin-right:8px;" onerror="this.onerror=null;this.src='images/hyperx.png';">
                 <span class="cart-item-title" style="font-weight:600;font-size:1.08rem;min-width:110px;max-width:140px;white-space:normal;word-break:break-word;overflow-wrap:break-word;">${item.name}</span>
-                <span class="cart-item-price" style="color:#f43f5e;font-weight:500;min-width:60px;">&euro;${item.price.toFixed(2)}</span>
+                <span class="cart-item-price" style="color:#333030;font-weight:500;min-width:60px;">&euro;${item.price.toFixed(2)}</span>
                 <input type="number" value="${item.quantity}" min="1" data-name="${item.name}" data-price="${item.price}" onchange="updateQuantity(event)" style="width:48px;text-align:center;margin-left:8px;margin-right:8px;">
                 <button class="removebtn" onclick="deleteItem(event, ${idx})" style="margin-left:8px;">X</button>
             </div>
