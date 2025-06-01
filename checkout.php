@@ -476,6 +476,21 @@ if(isset($_COOKIE['cartData'])) {
 
 
 
+<!-- Toaster Notification -->
+<div id="toaster" style="display:none;position:fixed;left:50%;bottom:40px;transform:translateX(-50%);background:linear-gradient(90deg,#23272f 0%,#444950 100%);color:#fff;padding:18px 38px;border-radius:32px;box-shadow:0 4px 24px rgba(34,39,47,0.13);font-size:1.1rem;font-weight:600;z-index:2000;transition:opacity 0.4s;opacity:0;pointer-events:none;letter-spacing:0.2px;text-align:center;">Order has been placed successfully!</div>
+<script>
+function showToaster(message) {
+  var toaster = document.getElementById('toaster');
+  toaster.textContent = message || 'Order has been placed successfully!';
+  toaster.style.display = 'block';
+  setTimeout(function() { toaster.style.opacity = '1'; }, 10);
+  setTimeout(function() {
+    toaster.style.opacity = '0';
+    setTimeout(function() { toaster.style.display = 'none'; }, 400);
+  }, 1800);
+}
+</script>
+
 <script>
 function updateCheckoutCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];

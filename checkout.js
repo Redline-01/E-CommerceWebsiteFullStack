@@ -11,8 +11,16 @@
           event.preventDefault();
           event.stopPropagation();
         } else {
-         
-          alert("Order has been placed successfully!");
+          event.preventDefault(); // Prevent immediate navigation
+          if (typeof showToaster === 'function') {
+            showToaster('Order has been placed successfully!');
+            setTimeout(function() {
+              form.submit(); // Submit after toaster is shown
+            }, 1500);
+          } else {
+            alert('Order has been placed successfully!');
+            form.submit();
+          }
         }
         form.classList.add('was-validated');
       }, false);

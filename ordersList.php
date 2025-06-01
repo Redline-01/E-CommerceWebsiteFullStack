@@ -7,10 +7,10 @@
     }
    
     if ($_SESSION['isadmin'] == 'true') {
-      $sql = "SELECT orders.*, login.username FROM orders INNER JOIN login ON orders.userid = login.id";
+      $sql = "SELECT orders.*, login.username FROM orders INNER JOIN login ON orders.userid = login.id ORDER BY orders.id DESC";
   } else {
       $userid = $_SESSION['id'];
-      $sql = "SELECT orders.*, login.username FROM orders INNER JOIN login ON orders.userid = login.id WHERE orders.userid = :userid";
+      $sql = "SELECT orders.*, login.username FROM orders INNER JOIN login ON orders.userid = login.id WHERE orders.userid = :userid ORDER BY orders.id DESC";
   }
   
   $selectProducts = $conn->prepare($sql);
@@ -263,6 +263,24 @@ document.addEventListener('DOMContentLoaded', adjustDashboardHeader);
       <?php } ?>
     </tbody>
   </table>
+  <!-- Pagination controls -->
+  <?php if ($totalPages > 1): ?>
+    <nav aria-label="Orders pagination">
+      <ul class="pagination justify-content-center">
+        <li class="page-item<?= ($page <= 1) ? ' disabled' : '' ?>">
+          <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1">Previous</a>
+        </li>
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+          <li class="page-item<?= ($i == $page) ? ' active' : '' ?>">
+            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+          </li>
+        <?php endfor; ?>
+        <li class="page-item<?= ($page >= $totalPages) ? ' disabled' : '' ?>">
+          <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+        </li>
+      </ul>
+    </nav>
+  <?php endif; ?>
 </div>
     </main>
   </div>

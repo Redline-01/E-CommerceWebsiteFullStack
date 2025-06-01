@@ -6,11 +6,24 @@
           header("Location: login.php");
     }
    
-    $sql = "SELECT * FROM clientmessages";
-    $selectMessages= $conn->prepare($sql);
-    $selectMessages->execute();
+    // Pagination setup
+$messagesPerPage = 10;
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $messagesPerPage;
 
-    $messages_data = $selectMessages->fetchAll();
+// Count total messages for pagination
+$countSql = "SELECT COUNT(*) FROM clientmessages";
+$countStmt = $conn->query($countSql);
+$totalMessages = $countStmt->fetchColumn();
+$totalPages = ceil($totalMessages / $messagesPerPage);
+
+// Main query with LIMIT and OFFSET
+$sql = "SELECT * FROM clientmessages ORDER BY id DESC LIMIT :limit OFFSET :offset";
+$selectMessages = $conn->prepare($sql);
+$selectMessages->bindValue(":limit", $messagesPerPage, PDO::PARAM_INT);
+$selectMessages->bindValue(":offset", $offset, PDO::PARAM_INT);
+$selectMessages->execute();
+$messages_data = $selectMessages->fetchAll();
     
 
  ?>
@@ -223,7 +236,24 @@ document.addEventListener('DOMContentLoaded', adjustDashboardHeader);
             
           </tbody>
         </table>
-      </div>
+        <!-- Pagination controls -->
+        <?php if ($totalPages > 1): ?>
+          <nav aria-label="Messages pagination">
+            <ul class="pagination justify-content-center">
+              <li class="page-item<?= ($page <= 1) ? ' disabled' : '' ?>">
+                <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1">Previous</a>
+              </li>
+              <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li class="page-item<?= ($i == $page) ? ' active' : '' ?>">
+                  <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                </li>
+              <?php endfor; ?>
+              <li class="page-item<?= ($page >= $totalPages) ? ' disabled' : '' ?>">
+                <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+              </li>
+            </ul>
+          </nav>
+        <?php endif; ?>
      <?php  } else {
         
 

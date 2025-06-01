@@ -6,11 +6,24 @@
           header("Location: login.php");
     }
    
-    $sql = "SELECT * FROM shopproducts";
-    $selectProducts = $conn->prepare($sql);
-    $selectProducts->execute();
+    // Pagination setup
+$productsPerPage = 10;
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $productsPerPage;
 
-    $products_data = $selectProducts->fetchAll();
+// Count total products for pagination
+$countSql = "SELECT COUNT(*) FROM shopproducts";
+$countStmt = $conn->query($countSql);
+$totalProducts = $countStmt->fetchColumn();
+$totalPages = ceil($totalProducts / $productsPerPage);
+
+// Main query with LIMIT and OFFSET
+$sql = "SELECT * FROM shopproducts ORDER BY id DESC LIMIT :limit OFFSET :offset";
+$selectProducts = $conn->prepare($sql);
+$selectProducts->bindValue(":limit", $productsPerPage, PDO::PARAM_INT);
+$selectProducts->bindValue(":offset", $offset, PDO::PARAM_INT);
+$selectProducts->execute();
+$products_data = $selectProducts->fetchAll();
     
 
  ?>
@@ -233,7 +246,24 @@ document.addEventListener('DOMContentLoaded', adjustDashboardHeader);
           </tbody>
           <td> <button class="btn btn-success"><a href="addProducts.php" style="text-decoration:none; color:white; font-weight:bold;">Add</a></button></td>
         </table>
-      </div>
+        <!-- Pagination controls -->
+        <?php if ($totalPages > 1): ?>
+          <nav aria-label="Products pagination">
+            <ul class="pagination justify-content-center">
+              <li class="page-item<?= ($page <= 1) ? ' disabled' : '' ?>">
+                <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1">Previous</a>
+              </li>
+              <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li class="page-item<?= ($i == $page) ? ' active' : '' ?>">
+                  <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                </li>
+              <?php endfor; ?>
+              <li class="page-item<?= ($page >= $totalPages) ? ' disabled' : '' ?>">
+                <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+              </li>
+            </ul>
+          </nav>
+        <?php endif; ?>
      <?php  } else {
       
     } ?>

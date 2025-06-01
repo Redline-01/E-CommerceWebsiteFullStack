@@ -6,11 +6,24 @@
           header("Location: login.php");
     }
    
-    $sql = "SELECT * FROM login";
-    $selectUsers = $conn->prepare($sql);
-    $selectUsers->execute();
+    // Pagination setup
+$usersPerPage = 10;
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $usersPerPage;
 
-    $users_data = $selectUsers->fetchAll();
+// Count total users for pagination
+$countSql = "SELECT COUNT(*) FROM login";
+$countStmt = $conn->query($countSql);
+$totalUsers = $countStmt->fetchColumn();
+$totalPages = ceil($totalUsers / $usersPerPage);
+
+// Main query with LIMIT and OFFSET
+$sql = "SELECT * FROM login ORDER BY id DESC LIMIT :limit OFFSET :offset";
+$selectUsers = $conn->prepare($sql);
+$selectUsers->bindValue(":limit", $usersPerPage, PDO::PARAM_INT);
+$selectUsers->bindValue(":offset", $offset, PDO::PARAM_INT);
+$selectUsers->execute();
+$users_data = $selectUsers->fetchAll();
     
 
  ?>
@@ -217,8 +230,10 @@ document.addEventListener('DOMContentLoaded', adjustDashboardHeader);
               <th scope="col">Surname</th>
               <th scope="col">Username</th>
               <th scope="col">Email</th>
+              <th scope="col">isadmin</th>
               <th scope="col">Update</th>
               <th scope="col">Delete</th>
+              <th scope="col">Admin Action</th>
             </tr>
           </thead>
           <tbody>
@@ -230,10 +245,26 @@ document.addEventListener('DOMContentLoaded', adjustDashboardHeader);
                 <td><?php echo $user_data['surname']; ?></td>
                 <td><?php echo $user_data['username']; ?></td>
                 <td><?php echo $user_data['email']; ?></td>
+                <td><?php echo $user_data['isadmin']; ?></td>
         
                 <td> <button class="btn btn-warning"><a href="updateUsers.php?id=<?= $user_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Update</a> </button> </td>
            
                 <td> <button class="btn btn-danger"><a href="deleteUsers.php?id=<?= $user_data['id'];?>" style="text-decoration:none; color:white; font-weight:bold;">Delete</a> </button></td>
+                <td>
+                  <?php if ($user_data['isadmin'] == 'true') { ?>
+                    <form method="post" action="toggleAdmin.php" style="display:inline;">
+                      <input type="hidden" name="userid" value="<?= $user_data['id']; ?>">
+                      <input type="hidden" name="action" value="remove">
+                      <button type="submit" class="btn btn-danger">Delete admin</button>
+                    </form>
+                  <?php } else { ?>
+                    <form method="post" action="toggleAdmin.php" style="display:inline;">
+                      <input type="hidden" name="userid" value="<?= $user_data['id']; ?>">
+                      <input type="hidden" name="action" value="add">
+                      <button type="submit" class="btn btn-success">Make Admin</button>
+                    </form>
+                  <?php } ?>
+                </td>
               </tr>
               
            <?php  } ?>
@@ -241,7 +272,24 @@ document.addEventListener('DOMContentLoaded', adjustDashboardHeader);
             
           </tbody>
         </table>
-      </div>
+        <!-- Pagination controls -->
+        <?php if ($totalPages > 1): ?>
+          <nav aria-label="Users pagination">
+            <ul class="pagination justify-content-center">
+              <li class="page-item<?= ($page <= 1) ? ' disabled' : '' ?>">
+                <a class="page-link" href="?page=<?= $page - 1 ?>" tabindex="-1">Previous</a>
+              </li>
+              <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li class="page-item<?= ($i == $page) ? ' active' : '' ?>">
+                  <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                </li>
+              <?php endfor; ?>
+              <li class="page-item<?= ($page >= $totalPages) ? ' disabled' : '' ?>">
+                <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+              </li>
+            </ul>
+          </nav>
+        <?php endif; ?>
      <?php  } else {
 
         echo "<h2>Welcome to your dashboard, ".$_SESSION['username']."!</h2>";
