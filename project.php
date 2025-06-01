@@ -206,7 +206,7 @@
 		<input type="email" id="email" placeholder="Your Email" name="email">
 	  </div>
 	  <div class="problem-box">
-		<input type="textarea" id="message" placeholder="Describe your problem here..." name="message"></textarea>
+		<textarea id="message" placeholder="Describe your problem here..." name="message" style="height:90px;"></textarea>
 	  </div>
 	  <button id="sendbtn" name="submit">Send</button>
 	</div>

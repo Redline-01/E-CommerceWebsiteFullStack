@@ -454,7 +454,7 @@ if(isset($_COOKIE['cartData'])) {
 
 
 
-<form action="clientMessages.php" method="POST">
+<form action="clientMessages3.php" method="POST">
 <div class="chat-box" id="chat-box">
 	<div class="chat-icon" onclick="toggleChat()">
 	  <img src="images/chatbox.webp" alt="Chat Icon">
@@ -466,7 +466,7 @@ if(isset($_COOKIE['cartData'])) {
 		<input type="email" id="email" placeholder="Your Email" name="email">
 	  </div>
 	  <div class="problem-box">
-		<input type="textarea" id="message" placeholder="Describe your problem here..." name="message"></textarea>
+		<textarea id="message" placeholder="Describe your problem here..." name="message" style="height:90px;"></textarea>
 	  </div>
 	  <button id="sendbtn" name="submit">Send</button>
 	</div>
