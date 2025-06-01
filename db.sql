@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 25, 2025 at 04:23 PM
+-- Generation Time: Jun 01, 2025 at 04:29 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -96,9 +96,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `userid`, `client`, `email`, `address`, `country`, `city`, `zip`, `productname`, `price`, `approve`) VALUES
-(8, 2, 'redline1', 'redon@gmail.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'HyperX Xbox Controller (Qty: 2), HyperX Cloud Red II Headset (Qty: 1)', 239.97, 'Approved'),
-(9, 2, 'redline1', 'redon-bytyqi1231@outlook.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'HyperX Xbox Controller (Qty: 1)', 69.99, 'Approved'),
-(10, 2, 'redline1', 'redon-bytyqi1231@outlook.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'Cloud MIX Buds 2 (Qty: 1)', 89.99, 'Approved');
+(18, 2, 'redline1', 'redon-bytyqi1231@outlook.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'HyperX Cloud II Headset (Qty: 1)', 99.99, 'Pending Approval'),
+(19, 2, 'redline1', 'redon-bytyqi1231@outlook.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'HyperX Xbox Controller (Qty: 1)', 69.99, 'Pending Approval');
 
 -- --------------------------------------------------------
 
@@ -200,7 +199,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `order_items`
