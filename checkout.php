@@ -215,7 +215,7 @@ if(isset($_COOKIE['cartData'])) {
 				</div>
 				<nav>
 					<ul>
-						<li id="usernameDB"><a href="dashboard.php"> <?php echo "Welcome, ".$_SESSION['username']; ?> </a></li>
+						<li id="usernameDB" title="Click here to go the the Dashboard"><a href="dashboard.php"> <?php echo "Welcome ".$_SESSION['username']; ?> </a></li>
 						<div id="verline"></div>
 						<li class="active"><a href="project.php">Home</a></li>
 					<!--	<li><a href="products.php">Products</a></li>  -->
