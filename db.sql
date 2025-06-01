@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 01, 2025 at 04:29 PM
+-- Generation Time: Jun 01, 2025 at 04:35 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -97,21 +97,8 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `userid`, `client`, `email`, `address`, `country`, `city`, `zip`, `productname`, `price`, `approve`) VALUES
 (18, 2, 'redline1', 'redon-bytyqi1231@outlook.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'HyperX Cloud II Headset (Qty: 1)', 99.99, 'Pending Approval'),
-(19, 2, 'redline1', 'redon-bytyqi1231@outlook.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'HyperX Xbox Controller (Qty: 1)', 69.99, 'Pending Approval');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `order_items`
---
-
-CREATE TABLE `order_items` (
-  `id` int(11) NOT NULL,
-  `order_id` int(11) DEFAULT NULL,
-  `productname` varchar(255) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(19, 2, 'redline1', 'redon-bytyqi1231@outlook.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'HyperX Xbox Controller (Qty: 1)', 69.99, 'Pending Approval'),
+(20, 2, 'redline1', 'redon-bytyqi1231@outlook.com', 'nr.7', 'Kosove', 'Prishtine', '10000', 'HyperX Xbox Controller (Qty: 1)', 69.99, 'Pending Approval');
 
 -- --------------------------------------------------------
 
@@ -167,13 +154,6 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `order_items`
---
-ALTER TABLE `order_items`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`);
-
---
 -- Indexes for table `shopproducts`
 --
 ALTER TABLE `shopproducts`
@@ -199,29 +179,13 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `order_items`
---
-ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `shopproducts`
 --
 ALTER TABLE `shopproducts`
   MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `order_items`
---
-ALTER TABLE `order_items`
-  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
