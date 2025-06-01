@@ -461,7 +461,6 @@
 		<div class="footer-content">
 			<h4>Main</h4>
 			<li><a href="project.php">Home</a></li>
-			<li><a href="products.php">Products</a></li>
 			<li><a href="shop.php">Shop</a></li>
 			<li><a href="#">Contact</a></li>
             <li><a href="dashboard.php">Dashboard</a></li>
