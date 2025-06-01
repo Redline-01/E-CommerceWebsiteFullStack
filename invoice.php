@@ -58,11 +58,12 @@ if (isset($_GET['send_email']) && $_GET['send_email'] == '1') {
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     $headers .= "From: no-reply@hyperx.com\r\n";
-    if (mail($to, $subject, $message, $headers)) {
-        echo '<div class="alert alert-success">Invoice sent to ' . htmlspecialchars($to) . '.</div>';
-    } else {
-        echo '<div class="alert alert-danger">Failed to send invoice email.</div>';
-    }
+  $mailResult = @mail($to, $subject, $message, $headers);
+  if ($mailResult) {
+    echo '<div class="alert alert-success">Invoice sent to ' . htmlspecialchars($to) . '.</div>';
+  } else {
+    echo '<div class="alert alert-warning">Email sending is not configured on this server. No email was sent, but the invoice is shown below.</div>';
+  }
 }
 ?><!DOCTYPE html>
 <html>
