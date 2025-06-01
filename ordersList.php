@@ -1,30 +1,41 @@
 <?php 
-
     include_once('config.php');
 
     if (empty($_SESSION['username'])) {
           header("Location: login.php");
     }
-   
-    if ($_SESSION['isadmin'] == 'true') {
-      $sql = "SELECT orders.*, login.username FROM orders INNER JOIN login ON orders.userid = login.id ORDER BY orders.id DESC";
-  } else {
-      $userid = $_SESSION['id'];
-      $sql = "SELECT orders.*, login.username FROM orders INNER JOIN login ON orders.userid = login.id WHERE orders.userid = :userid ORDER BY orders.id DESC";
-  }
-  
-  $selectProducts = $conn->prepare($sql);
-  
-  if ($_SESSION['isadmin'] != 'true') {
-      $selectProducts->bindParam(":userid", $userid);
-  }
-  
-  $selectProducts->execute();
-  $products_data = $selectProducts->fetchAll();
-  
-    
-    
 
+    // Pagination setup
+    $ordersPerPage = 10;
+    $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+    $offset = ($page - 1) * $ordersPerPage;
+
+    if ($_SESSION['isadmin'] == 'true') {
+        $countSql = "SELECT COUNT(*) FROM orders";
+        $countStmt = $conn->prepare($countSql);
+        $countStmt->execute();
+        $totalOrders = $countStmt->fetchColumn();
+        $totalPages = ($ordersPerPage > 0) ? ceil($totalOrders / $ordersPerPage) : 1;
+        $sql = "SELECT orders.*, login.username FROM orders INNER JOIN login ON orders.userid = login.id ORDER BY orders.id DESC LIMIT :limit OFFSET :offset";
+        $selectProducts = $conn->prepare($sql);
+        $selectProducts->bindValue(':limit', $ordersPerPage, PDO::PARAM_INT);
+        $selectProducts->bindValue(':offset', $offset, PDO::PARAM_INT);
+    } else {
+        $userid = $_SESSION['id'];
+        $countSql = "SELECT COUNT(*) FROM orders WHERE userid = :userid";
+        $countStmt = $conn->prepare($countSql);
+        $countStmt->bindParam(":userid", $userid);
+        $countStmt->execute();
+        $totalOrders = $countStmt->fetchColumn();
+        $totalPages = ($ordersPerPage > 0) ? ceil($totalOrders / $ordersPerPage) : 1;
+        $sql = "SELECT orders.*, login.username FROM orders INNER JOIN login ON orders.userid = login.id WHERE orders.userid = :userid ORDER BY orders.id DESC LIMIT :limit OFFSET :offset";
+        $selectProducts = $conn->prepare($sql);
+        $selectProducts->bindParam(":userid", $userid);
+        $selectProducts->bindValue(':limit', $ordersPerPage, PDO::PARAM_INT);
+        $selectProducts->bindValue(':offset', $offset, PDO::PARAM_INT);
+    }
+    $selectProducts->execute();
+    $products_data = $selectProducts->fetchAll();
  ?>
 
  <!DOCTYPE html>
